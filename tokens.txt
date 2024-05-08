@@ -11,6 +11,8 @@ ASSIGNMENT: :=
 SIN: sin
 COS: cos
 TAN: tan
+
+# delimiters:
 PAR_LEFT: (
 PAR_RIGHT: )
 BRACE_LEFT: {
