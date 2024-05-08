@@ -14,7 +14,6 @@ ASSIGNMENT: :=
 # built-in functions
 SIN: sin
 COS: cos
-TAN: tan
 LOG: log
 SQRT: sqrt
 ROOT: root
@@ -26,3 +25,10 @@ BRACE_LEFT: {
 BRACE_RIGHT: }
 BRACKET_LEFT: [
 BRACKET_RIGHT: ]
+
+# instructions
+FUNC: func
+IF: if
+ELSE: else
+FOR: for
+PRINT: print
