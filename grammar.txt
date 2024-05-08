@@ -15,3 +15,22 @@ trig_func: sin | cos
 built_in_func: trig_func | sin | cos | sqrt | root | log
 
 expression: built_in_func | NUMBER | expression (() built_in_func | NUMBER | expression)*
+
+exp_func: EXP PARENTHESES_OPEN expression PARENTHESES_CLOSE
+abs_func: ABS PARENTHESES_OPEN expression PARENTHESES_CLOSE
+ceil_func: CEIL PARENTHESES_OPEN expression PARENTHESES_CLOSE
+floor_func: FLOOR PARENTHESES_OPEN expression PARENTHESES_CLOSE
+
+arcsin_func: ARCSIN PARENTHESES_OPEN expression PARENTHESES_CLOSE
+arccos_func: ARCCOS PARENTHESES_OPEN expression PARENTHESES_CLOSE
+arctan_func: ARCTAN PARENTHESES_OPEN expression PARENTHESES_CLOSE
+
+sinh_func: SINH PARENTHESES_OPEN expression PARENTHESES_CLOSE
+cosh_func: COSH PARENTHESES_OPEN expression PARENTHESES_CLOSE
+cosh_func: COSH PARENTHESES_OPEN expression PARENTHESES_CLOSE
+
+factorial_func: expression FACTORIAL
+modulo_op: expression MOD expression
+
+
+
