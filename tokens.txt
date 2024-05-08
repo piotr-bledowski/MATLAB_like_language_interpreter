@@ -31,4 +31,6 @@ FUNC: func
 IF: if
 ELSE: else
 FOR: for
+IN: in
+RANGE: range
 PRINT: print
