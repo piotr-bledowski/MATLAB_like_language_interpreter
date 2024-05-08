@@ -25,6 +25,7 @@ BRACE_LEFT: {
 BRACE_RIGHT: }
 BRACKET_LEFT: [
 BRACKET_RIGHT: ]
+SEMICOLON: ;
 
 # instructions
 FUNC: func
