@@ -1,16 +1,23 @@
+# operators:
 PLUS: +
 MINUS: -
 MULTIPLICATION: *
 DIVISION: /
+POWER: ^
 EQUALS: =
 LESS_THAN: <
 GREATER_THAN: >
 LESS_THAN_EQUALS: <=
 GREATER_THAN_EQUALS: >=
 ASSIGNMENT: :=
+
+# built-in functions
 SIN: sin
 COS: cos
 TAN: tan
+LOG: log
+SQRT: sqrt
+ROOT: root
 
 # delimiters:
 PAR_LEFT: (
