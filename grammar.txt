@@ -1,11 +1,17 @@
 matmul: MATRIX MULTIPLICATION MATRIX
 dot_product: VECTOR MULTIPLICATION VECTOR
 
-sin_func: SIN PARENTHESES_OPEN expression PARENTHESES_CLOSE
-cos_func: COS PARENTHESES_OPEN expression PARENTHESES_CLOSE
-sqrt_func: SQRT PARENTHESES_OPEN expression PARENTHESES_CLOSE
-root_func: ROOT PARENTHESES_OPEN expression, number PARENTHESES_CLOSE
-log_func: LOG PARENTHESES_OPEN expression, number PARENTHESES_CLOSE
+sin: SIN PARENTHESES_OPEN expression PARENTHESES_CLOSE
+cos: COS PARENTHESES_OPEN expression PARENTHESES_CLOSE
+sqrt: SQRT PARENTHESES_OPEN expression PARENTHESES_CLOSE
+root: ROOT PARENTHESES_OPEN expression, number PARENTHESES_CLOSE
+log: LOG PARENTHESES_OPEN expression, number PARENTHESES_CLOSE
 
 vector: BRACKET_OPEN expression (, expression)* number BRACKET_CLOSE
 matrix: BRACKET_OPEN vector (, vector)* BRACKET_CLOSE
+
+trig_func: sin | cos
+
+built_in_func: trig_func | sin | cos | sqrt | root | log
+
+expression: built_in_func | NUMBER | expression (() built_in_func | NUMBER | expression)*
