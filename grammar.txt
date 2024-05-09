@@ -32,5 +32,17 @@ cosh_func: COSH PARENTHESES_OPEN expression PARENTHESES_CLOSE
 factorial_func: expression FACTORIAL
 modulo_op: expression MOD expression
 
+params: param (, param)* | empty
+param: VARIABLE | VARIABLE ASSIGNMENT expression
+empty: 
+statements: statement | statement statements
+statement: assignment_statement | expression | if_statement | for_statement | print_statement
+assignment_statement: VARIABLE ASSIGNMENT expression
+
+func_statement: FUNCTION PARENTHESES_OPEN params PARENTHESES_CLOSE BRACE_OPEN statements BRACE_CLOSE
+if_statement: IF condition BRACE_OPEN statements BRACE_CLOSE | IF condition BRACE_OPEN statements BRACE_CLOSE else_statement
+else_statement: ELSE BRACE_OPEN statements BRACE_CLOSE
+for_statement: FOR VARIABLE ASSIGNMENT expression SEMICOLON expression SEMICOLON expression BRACE_OPEN statements BRACE_CLOSE
+print_statement: PRINT PARENTHESES_OPEN expression PARENTHESES_CLOSE
 
 
