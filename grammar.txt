@@ -1,11 +1,11 @@
 matmul: MATRIX MULTIPLICATION MATRIX
 dot_product: VECTOR MULTIPLICATION VECTOR
 
-sin: SIN PARENTHESES_OPEN expression PARENTHESES_CLOSE
-cos: COS PARENTHESES_OPEN expression PARENTHESES_CLOSE
-sqrt: SQRT PARENTHESES_OPEN expression PARENTHESES_CLOSE
-root: ROOT PARENTHESES_OPEN expression, number PARENTHESES_CLOSE
-log: LOG PARENTHESES_OPEN expression, number PARENTHESES_CLOSE
+sin: SIN PAR_LEFT expression PAR_RIGHT
+cos: COS PAR_LEFT expression PAR_RIGHT
+sqrt: SQRT PAR_LEFT expression PAR_RIGHT
+root: ROOT PAR_LEFT expression, number PAR_RIGHT
+log: LOG PAR_LEFT expression, number PAR_RIGHT
 
 vector: BRACKET_OPEN expression (, expression)* number BRACKET_CLOSE
 matrix: BRACKET_OPEN vector (, vector)* BRACKET_CLOSE
@@ -16,18 +16,18 @@ built_in_func: trig_func | sin | cos | sqrt | root | log
 
 expression: built_in_func | NUMBER | expression (() built_in_func | NUMBER | expression)*
 
-exp_func: EXP PARENTHESES_OPEN expression PARENTHESES_CLOSE
-abs_func: ABS PARENTHESES_OPEN expression PARENTHESES_CLOSE
-ceil_func: CEIL PARENTHESES_OPEN expression PARENTHESES_CLOSE
-floor_func: FLOOR PARENTHESES_OPEN expression PARENTHESES_CLOSE
+exp_func: EXP PAR_LEFT expression PAR_RIGHT
+abs_func: ABS PAR_LEFT expression PAR_RIGHT
+ceil_func: CEIL PAR_LEFT expression PAR_RIGHT
+floor_func: FLOOR PAR_LEFT expression PAR_RIGHT
 
-arcsin_func: ARCSIN PARENTHESES_OPEN expression PARENTHESES_CLOSE
-arccos_func: ARCCOS PARENTHESES_OPEN expression PARENTHESES_CLOSE
-arctan_func: ARCTAN PARENTHESES_OPEN expression PARENTHESES_CLOSE
+arcsin_func: ARCSIN PAR_LEFT expression PAR_RIGHT
+arccos_func: ARCCOS PAR_LEFT expression PAR_RIGHT
+arctan_func: ARCTAN PAR_LEFT expression PAR_RIGHT
 
-sinh_func: SINH PARENTHESES_OPEN expression PARENTHESES_CLOSE
-cosh_func: COSH PARENTHESES_OPEN expression PARENTHESES_CLOSE
-cosh_func: COSH PARENTHESES_OPEN expression PARENTHESES_CLOSE
+sinh_func: SINH PAR_LEFT expression PAR_RIGHT
+cosh_func: COSH PAR_LEFT expression PAR_RIGHT
+cosh_func: COSH PAR_LEFT expression PAR_RIGHT
 
 factorial_func: expression FACTORIAL
 modulo_op: expression MOD expression
@@ -39,10 +39,10 @@ statements: statement | statement statements
 statement: assignment_statement | expression | if_statement | for_statement | print_statement | func_statement
 
 assignment_statement: VARIABLE ASSIGNMENT expression
-func_statement: FUNCTION PARENTHESES_OPEN params PARENTHESES_CLOSE BRACE_OPEN statements BRACE_CLOSE
-if_statement: IF condition BRACE_OPEN statements BRACE_CLOSE | IF condition BRACE_OPEN statements BRACE_CLOSE else_statement
-else_statement: ELSE BRACE_OPEN statements BRACE_CLOSE
-for_statement: FOR VARIABLE ASSIGNMENT expression SEMICOLON expression SEMICOLON expression BRACE_OPEN statements BRACE_CLOSE
-print_statement: PRINT PARENTHESES_OPEN expression PARENTHESES_CLOSE
+func_statement: FUNCTION PAR_LEFT params PAR_RIGHT BRACE_LEFT statements BRACE_RIGHT
+if_statement: IF condition BRACE_LEFT statements BRACE_RIGHT | IF condition BRACE_LEFT statements BRACE_RIGHT else_statement
+else_statement: ELSE BRACE_LEFT statements BRACE_RIGHT
+for_statement: FOR VARIABLE ASSIGNMENT expression SEMICOLON expression SEMICOLON expression BRACE_LEFT statements BRACE_RIGHT
+print_statement: PRINT PAR_LEFT expression PAR_RIGHT
 
 
