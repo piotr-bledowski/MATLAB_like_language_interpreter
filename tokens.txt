@@ -28,6 +28,7 @@ BRACKET_RIGHT: ]
 SEMICOLON: ;
 
 # instructions
+VARIABLE: [a-zA-Z_][a-zA-Z0-9_]*
 FUNC: func
 IF: if
 ELSE: else
