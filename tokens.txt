@@ -12,6 +12,7 @@ LESS_THAN_EQUALS: <=
 GREATER_THAN_EQUALS: >=
 ASSIGNMENT: :=
 FACTORIAL: !
+COMMA: ,
 
 # built-in functions
 SIN: sin
