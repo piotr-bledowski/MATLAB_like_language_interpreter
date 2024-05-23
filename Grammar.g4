@@ -6,17 +6,17 @@ dot_product: VECTOR MULTIPLICATION VECTOR;
 sin: SIN PAR_LEFT expression PAR_RIGHT;
 cos: COS PAR_LEFT expression PAR_RIGHT;
 sqrt: SQRT PAR_LEFT expression PAR_RIGHT;
-root: ROOT PAR_LEFT expression COMMA number PAR_RIGHT;
-log: LOG PAR_LEFT expression COMMA number PAR_RIGHT;
+root: ROOT PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
+log: LOG PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
 
-vector: BRACKET_OPEN expression (COMMA expression)* number BRACKET_CLOSE;
+vector: BRACKET_OPEN expression (COMMA expression)* NUMBER BRACKET_CLOSE;
 matrix: BRACKET_OPEN vector (COMMA vector)* BRACKET_CLOSE;
 
 trig_func: sin | cos;
 
 built_in_func: trig_func | sin | cos | sqrt | root | log;
 
-expression: built_in_func | NUMBER | expression (() built_in_func | NUMBER | expression)*;
+expression: built_in_func | NUMBER;/* | expression (() built_in_func | NUMBER | expression)*;*/
 
 exp_func: EXP PAR_LEFT expression PAR_RIGHT;
 abs_func: ABS PAR_LEFT expression PAR_RIGHT;
@@ -47,3 +47,4 @@ for_statement: FOR VARIABLE ASSIGNMENT expression SEMICOLON expression SEMICOLON
 print_statement: PRINT PAR_LEFT expression PAR_RIGHT;
 
 
+condition: empty;
