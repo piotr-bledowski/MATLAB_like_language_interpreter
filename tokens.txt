@@ -37,3 +37,6 @@ IF: if
 ELSE: else
 FOR: for
 PRINT: print
+
+# other
+NUMBER: [0-9].?[0-9]*

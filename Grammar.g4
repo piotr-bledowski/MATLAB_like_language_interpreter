@@ -29,14 +29,13 @@ arctan_func: ARCTAN PAR_LEFT expression PAR_RIGHT;
 
 sinh_func: SINH PAR_LEFT expression PAR_RIGHT;
 cosh_func: COSH PAR_LEFT expression PAR_RIGHT;
-cosh_func: COSH PAR_LEFT expression PAR_RIGHT;
 
 factorial_func: expression FACTORIAL;
 modulo_op: expression MOD expression;
 
 params: param (COMMA param)* | empty;
 param: VARIABLE | VARIABLE ASSIGNMENT expression;
-empty: 
+empty: ;
 statements: statement | statement statements;
 statement: assignment_statement | expression | if_statement | for_statement | print_statement | func_statement;
 
