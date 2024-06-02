@@ -232,14 +232,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_matmul
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMatmul" ):
-                listener.enterMatmul(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMatmul" ):
-                listener.exitMatmul(self)
-
 
 
 
@@ -282,14 +274,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_dot_product
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDot_product" ):
-                listener.enterDot_product(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDot_product" ):
-                listener.exitDot_product(self)
 
 
 
@@ -337,14 +321,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_sin
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSin" ):
-                listener.enterSin(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSin" ):
-                listener.exitSin(self)
 
 
 
@@ -395,14 +371,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_cos
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterCos" ):
-                listener.enterCos(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitCos" ):
-                listener.exitCos(self)
-
 
 
 
@@ -451,14 +419,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_sqrt
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSqrt" ):
-                listener.enterSqrt(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSqrt" ):
-                listener.exitSqrt(self)
 
 
 
@@ -514,14 +474,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_root
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRoot" ):
-                listener.enterRoot(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRoot" ):
-                listener.exitRoot(self)
 
 
 
@@ -581,14 +533,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_log
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLog" ):
-                listener.enterLog(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLog" ):
-                listener.exitLog(self)
 
 
 
@@ -651,14 +595,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_vector
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVector" ):
-                listener.enterVector(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVector" ):
-                listener.exitVector(self)
 
 
 
@@ -728,14 +664,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_matrix
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMatrix" ):
-                listener.enterMatrix(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMatrix" ):
-                listener.exitMatrix(self)
-
 
 
 
@@ -790,14 +718,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_trig_func
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterTrig_func" ):
-                listener.enterTrig_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitTrig_func" ):
-                listener.exitTrig_func(self)
 
 
 
@@ -865,14 +785,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_built_in_func
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBuilt_in_func" ):
-                listener.enterBuilt_in_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBuilt_in_func" ):
-                listener.exitBuilt_in_func(self)
 
 
 
@@ -948,14 +860,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_expression
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpression" ):
-                listener.enterExpression(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpression" ):
-                listener.exitExpression(self)
-
 
 
 
@@ -1012,14 +916,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_exp_func
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExp_func" ):
-                listener.enterExp_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExp_func" ):
-                listener.exitExp_func(self)
-
 
 
 
@@ -1068,14 +964,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_abs_func
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAbs_func" ):
-                listener.enterAbs_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAbs_func" ):
-                listener.exitAbs_func(self)
 
 
 
@@ -1126,14 +1014,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_ceil_func
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterCeil_func" ):
-                listener.enterCeil_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitCeil_func" ):
-                listener.exitCeil_func(self)
-
 
 
 
@@ -1182,14 +1062,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_floor_func
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFloor_func" ):
-                listener.enterFloor_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFloor_func" ):
-                listener.exitFloor_func(self)
 
 
 
@@ -1240,14 +1112,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_arcsin_func
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArcsin_func" ):
-                listener.enterArcsin_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArcsin_func" ):
-                listener.exitArcsin_func(self)
-
 
 
 
@@ -1296,14 +1160,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_arccos_func
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArccos_func" ):
-                listener.enterArccos_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArccos_func" ):
-                listener.exitArccos_func(self)
 
 
 
@@ -1354,14 +1210,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_arctan_func
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArctan_func" ):
-                listener.enterArctan_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArctan_func" ):
-                listener.exitArctan_func(self)
-
 
 
 
@@ -1410,14 +1258,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_sinh_func
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSinh_func" ):
-                listener.enterSinh_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSinh_func" ):
-                listener.exitSinh_func(self)
 
 
 
@@ -1468,14 +1308,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_cosh_func
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterCosh_func" ):
-                listener.enterCosh_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitCosh_func" ):
-                listener.exitCosh_func(self)
-
 
 
 
@@ -1519,14 +1351,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_factorial_func
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFactorial_func" ):
-                listener.enterFactorial_func(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFactorial_func" ):
-                listener.exitFactorial_func(self)
-
 
 
 
@@ -1568,14 +1392,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_modulo_op
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterModulo_op" ):
-                listener.enterModulo_op(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitModulo_op" ):
-                listener.exitModulo_op(self)
 
 
 
@@ -1627,14 +1443,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_params
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParams" ):
-                listener.enterParams(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParams" ):
-                listener.exitParams(self)
 
 
 
@@ -1702,14 +1510,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_param
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParam" ):
-                listener.enterParam(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParam" ):
-                listener.exitParam(self)
-
 
 
 
@@ -1758,14 +1558,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_empty
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEmpty" ):
-                listener.enterEmpty(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEmpty" ):
-                listener.exitEmpty(self)
-
 
 
 
@@ -1802,14 +1594,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_statements
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatements" ):
-                listener.enterStatements(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatements" ):
-                listener.exitStatements(self)
 
 
 
@@ -1879,14 +1663,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_statement
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatement" ):
-                listener.enterStatement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatement" ):
-                listener.exitStatement(self)
 
 
 
@@ -1961,14 +1737,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_assignment_statement
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssignment_statement" ):
-                listener.enterAssignment_statement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssignment_statement" ):
-                listener.exitAssignment_statement(self)
-
 
 
 
@@ -2025,14 +1793,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_func_statement
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFunc_statement" ):
-                listener.enterFunc_statement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFunc_statement" ):
-                listener.exitFunc_statement(self)
 
 
 
@@ -2096,14 +1856,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_if_statement
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIf_statement" ):
-                listener.enterIf_statement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIf_statement" ):
-                listener.exitIf_statement(self)
 
 
 
@@ -2179,14 +1931,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_else_statement
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterElse_statement" ):
-                listener.enterElse_statement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitElse_statement" ):
-                listener.exitElse_statement(self)
-
 
 
 
@@ -2255,14 +1999,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_for_statement
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFor_statement" ):
-                listener.enterFor_statement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFor_statement" ):
-                listener.exitFor_statement(self)
-
 
 
 
@@ -2326,14 +2062,6 @@ class GrammarParser ( Parser ):
         def getRuleIndex(self):
             return GrammarParser.RULE_print_statement
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPrint_statement" ):
-                listener.enterPrint_statement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPrint_statement" ):
-                listener.exitPrint_statement(self)
-
 
 
 
@@ -2373,14 +2101,6 @@ class GrammarParser ( Parser ):
 
         def getRuleIndex(self):
             return GrammarParser.RULE_condition
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterCondition" ):
-                listener.enterCondition(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitCondition" ):
-                listener.exitCondition(self)
 
 
 
