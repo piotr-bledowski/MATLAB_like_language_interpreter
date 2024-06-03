@@ -1,6 +1,6 @@
 
-x = 10
+x := 10
 if x > 0:
-    positive_value = x
+    positive_value := x
 else:
-    negative_value = x
+    negative_value := x
