@@ -1,5 +1,4 @@
 import sys
-from antlr4 import *
 from GrammarLexer import GrammarLexer
 from GrammarParser import GrammarParser
 from GrammarVisitor import GrammarVisitor
@@ -23,12 +22,7 @@ def add_nodes(dot, tree, parent=None):
             dot.node(str(id(child)), str(child))
             dot.edge(node_id, str(id(child)))
 
-def main(argv):
-    input_stream = FileStream(argv[1])
-    lexer = GrammarLexer(input_stream)
-    stream = CommonTokenStream(lexer)
-    parser = GrammarParser(stream)
-    tree = parser.start_()
+def main():
 
 
     # Example 1: Nested Expressions
