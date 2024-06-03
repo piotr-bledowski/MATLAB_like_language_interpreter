@@ -1,0 +1,14 @@
+
+example_tree_6 = ("conditional", 
+                  ("comparison", ("identifier", "x"), ">", ("number", "0")),
+                  "THEN",
+                  ("conditional", 
+                   ("comparison", ("identifier", "y"), ">", ("number", "0")),
+                   "THEN",
+                   ("expression", ("number", "1")),
+                   "ELSE",
+                   ("expression", ("number", "2"))
+                  ),
+                  "ELSE",
+                  ("expression", ("number", "3"))
+                 )
