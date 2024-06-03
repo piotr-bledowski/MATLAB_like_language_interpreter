@@ -1,7 +1,3 @@
-import sys
-from GrammarLexer import GrammarLexer
-from GrammarParser import GrammarParser
-from GrammarVisitor import GrammarVisitor
 from graphviz import Digraph
 
 def create_parser_tree(tree, name):
@@ -23,8 +19,6 @@ def add_nodes(dot, tree, parent=None):
             dot.edge(node_id, str(id(child)))
 
 def main():
-
-
     # Example 1: Nested Expressions
     example_tree_1 = ("expression", 
                       ("operation", ("number", "5"), "+", ("operation", ("number", "3"), "*", ("number", "2")))
@@ -93,5 +87,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
