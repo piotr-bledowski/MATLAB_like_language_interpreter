@@ -46,5 +46,43 @@ else_statement: ELSE BRACE_LEFT statements BRACE_RIGHT;
 for_statement: FOR VARIABLE ASSIGNMENT expression SEMICOLON expression SEMICOLON expression BRACE_LEFT statements BRACE_RIGHT;
 print_statement: PRINT PAR_LEFT expression PAR_RIGHT;
 
+condition: expression logic_op expression;
 
-condition: empty;
+logic_op: EQUALS | NOT_EQUALS | LESS_THAN | GREATER_THAN | LESS_THAN_EQUALS | GREATER_THAN_EQUALS;
+
+PLUS: '+';
+MINUS: '-';
+MULTIPLICATION: '*';
+DIVISION: '/';
+POWER: '^';
+EQUALS: '=';
+NOT_EQUALS: '<>';
+LESS_THAN: '<';
+GREATER_THAN: '>';
+LESS_THAN_EQUALS: '<=';
+GREATER_THAN_EQUALS: '>=';
+ASSIGNMENT: ':=';
+FACTORIAL: '!';
+COMMA: ',';
+
+SIN: 'sin';
+COS: 'cos';
+LOG: 'log';
+SQRT: 'sqrt';
+ROOT: 'root';
+
+PAR_LEFT: '(';
+PAR_RIGHT: ')';
+BRACE_LEFT: '{';
+BRACE_RIGHT: '}';
+BRACKET_LEFT: '[';
+BRACKET_RIGHT: ']';
+SEMICOLON: ';';
+
+VARIABLE: [a-zA-Z_][a-zA-Z0-9_]*;
+FUNC: 'func';
+IF: 'if';
+ELSE: 'else';
+PRINT: 'print';
+
+NUMBER: [0-9].?[0-9]*;

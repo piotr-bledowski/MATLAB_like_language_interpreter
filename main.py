@@ -1,14 +1,14 @@
 import sys
 from antlr4 import *
-from ExprLexer import ExprLexer
-from ExprParser import ExprParser
-from VisitorInterp import VisitorInterp
+from GrammarLexer import GrammarLexer
+from GrammarParser import GrammarParser
+from GrammarVisitor import GrammarVisitor
 
 def main(argv):
     input_stream = FileStream(argv[1])
-    lexer = ExprLexer(input_stream)
+    lexer = GrammarLexer(input_stream)
     stream = CommonTokenStream(lexer)
-    parser = ExprParser(stream)
+    parser = GrammarParser(stream)
     tree = parser.start_()
 
 if __name__ == '__main__':
