@@ -1,5 +1,7 @@
 grammar Grammar;
 
+program: statements+EOF;
+
 matmul: MATRIX MULTIPLICATION MATRIX;
 dot_product: VECTOR MULTIPLICATION VECTOR;
 

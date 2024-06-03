@@ -8,6 +8,15 @@ else:
 # This class defines a complete listener for a parse tree produced by GrammarParser.
 class GrammarListener(ParseTreeListener):
 
+    # Enter a parse tree produced by GrammarParser#program.
+    def enterProgram(self, ctx:GrammarParser.ProgramContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#program.
+    def exitProgram(self, ctx:GrammarParser.ProgramContext):
+        pass
+
+
     # Enter a parse tree produced by GrammarParser#matmul.
     def enterMatmul(self, ctx:GrammarParser.MatmulContext):
         pass
