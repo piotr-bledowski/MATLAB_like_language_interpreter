@@ -1,0 +1,7 @@
+
+example_tree_4 = ("function_call", 
+                  ("function_name", "fibonacci"),
+                  "(", 
+                  ("argument", ("number", "5")), 
+                  ")"
+                 )
