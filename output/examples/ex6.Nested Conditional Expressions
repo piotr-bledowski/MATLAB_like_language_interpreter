@@ -1,5 +1,5 @@
 
-example_tree_6 = ("conditional", 
+example_tree_6 := ("conditional", 
                   ("comparison", ("identifier", "x"), ">", ("number", "0")),
                   "THEN",
                   ("conditional", 
