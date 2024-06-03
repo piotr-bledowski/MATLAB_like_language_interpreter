@@ -39,7 +39,7 @@ params: param (COMMA param)* | empty;
 param: VARIABLE | VARIABLE ASSIGNMENT expression;
 empty: ;
 statements: statement | statement statements;
-statement: assignment_statement | expression | if_statement | for_statement | print_statement | func_statement;
+statement: (assignment_statement | expression | if_statement | for_statement | print_statement | func_statement)? NEWLINE;
 
 assignment_statement: VARIABLE ASSIGNMENT expression;
 func_statement: FUNCTION PAR_LEFT params PAR_RIGHT BRACE_LEFT statements BRACE_RIGHT;
@@ -88,3 +88,6 @@ ELSE: 'else';
 PRINT: 'print';
 
 NUMBER: [0-9].?[0-9]*;
+
+SPACE: ' ';
+NEWLINE: '\n';
