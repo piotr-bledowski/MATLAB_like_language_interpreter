@@ -1,4 +1,5 @@
 from graphviz import Digraph
+import os
 
 def create_parser_tree(tree, name):
     dot = Digraph(name)
@@ -19,74 +20,22 @@ def add_nodes(dot, tree, parent=None):
             dot.edge(node_id, str(id(child)))
 
 def main():
-    # Example 1: Nested Expressions
-    example_tree_1 = ("expression", 
-                      ("operation", ("number", "5"), "+", ("operation", ("number", "3"), "*", ("number", "2")))
-                     )
-    
-    # Example 2: Conditional Expression
-    example_tree_2 = ("conditional", 
-                      ("comparison", ("identifier", "x"), ">", ("number", "0")),
-                      "THEN",
-                      ("identifier", "positive_value"),
-                      "ELSE",
-                      ("identifier", "negative_value")
-                     )
-    
-    # Example 3: Function Call
-    example_tree_3 = ("function_call", 
-                      ("function_name", "sum"),
-                      "(", 
-                      ("argument", ("number", "10")), 
-                      ",", 
-                      ("argument", ("number", "20")), 
-                      ")"
-                     )
-    
-    # Example 4: Recursive Function Call
-    example_tree_4 = ("function_call", 
-                      ("function_name", "fibonacci"),
-                      "(", 
-                      ("argument", ("number", "5")), 
-                      ")"
-                     )
-    
-    # Example 5: Loop Structure
-    example_tree_5 = ("loop", 
-                      "FOR", 
-                      ("identifier", "i"), 
-                      "IN", 
-                      ("range", ("number", "10")), 
-                      "DO", 
-                      ("statement", 
-                       ("expression", 
-                        ("operation", ("identifier", "total"), "+", ("identifier", "i"))
-                       )
-                      )
-                     )
-    
-    # Example 6: Nested Conditional Expressions
-    example_tree_6 = ("conditional", 
-                      ("comparison", ("identifier", "x"), ">", ("number", "0")),
-                      "THEN",
-                      ("conditional", 
-                       ("comparison", ("identifier", "y"), ">", ("number", "0")),
-                       "THEN",
-                       ("expression", ("number", "1")),
-                       "ELSE",
-                       ("expression", ("number", "2"))
-                      ),
-                      "ELSE",
-                      ("expression", ("number", "3"))
-                     )
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
 
-    for i, example_tree in enumerate([example_tree_1, example_tree_2, example_tree_3,
-                                      example_tree_4, example_tree_5, example_tree_6], 1):
+    example_tree_1 = ("expression", ("operation", ("number", "5"), "+", ("operation", ("number", "3"), "*", ("number", "2"))))
+    example_tree_2 = ("conditional", ("comparison", ("identifier", "x"), ">", ("number", "0")), "THEN", ("identifier", "positive_value"), "ELSE", ("identifier", "negative_value"))
+    example_tree_3 = ("function_call", ("function_name", "sum"), "(", ("argument", ("number", "10")), ",", ("argument", ("number", "20")), ")")
+    example_tree_4 = ("function_call", ("function_name", "fibonacci"), "(", ("argument", ("number", "5")), ")")
+    example_tree_5 = ("loop", "FOR", ("identifier", "i"), "IN", ("range", ("number", "10")), "DO", ("statement", ("expression", ("operation", ("identifier", "total"), "+", ("identifier", "i")))))
+    example_tree_6 = ("conditional", ("comparison", ("identifier", "x"), ">", ("number", "0")), "THEN", ("conditional", ("comparison", ("identifier", "y"), ">", ("number", "0")), "THEN", ("expression", ("number", "1")), "ELSE", ("expression", ("number", "2"))), "ELSE", ("expression", ("number", "3")))
+
+    examples = [example_tree_1, example_tree_2, example_tree_3, example_tree_4, example_tree_5, example_tree_6]
+
+    for i, example_tree in enumerate(examples, 1):
         dot = create_parser_tree(example_tree, f"example_{i}")
-        dot.render(f"parser_tree_example_{i}", format="png", cleanup=True)
+        output_path = os.path.join(output_dir, f"parser_tree_example_{i}.png")
+        dot.render(output_path, format="png", cleanup=True)
 
 if __name__ == "__main__":
     main()
-
-
-
