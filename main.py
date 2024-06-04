@@ -1,5 +1,6 @@
 from graphviz import Digraph
 import os
+from interpreter import parse_file_to_nested_list
 
 def create_parser_tree(tree, name):
     dot = Digraph(name)
@@ -37,5 +38,13 @@ def main():
         output_path = os.path.join(output_dir, f"parser_tree_example_{i}.png")
         dot.render(output_path, format="png", cleanup=True)
 
+def nested_list_to_tuple(nested_list):
+    if isinstance(nested_list, list):
+        return tuple(nested_list_to_tuple(item) for item in nested_list)
+    return nested_list
+
 if __name__ == "__main__":
     main()
+    tree_list = nested_list_to_tuple(parse_file_to_nested_list('simple_example.txt'))
+    dot = create_parser_tree(tree_list, "what")
+    dot.render('what', format='png', cleanup=True)
