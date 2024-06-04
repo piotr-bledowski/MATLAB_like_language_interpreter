@@ -41,7 +41,7 @@ def print_tree(node, indent=0):
             print_tree(child, indent + 2)
 
 
-def interpret(input_file: str='simple_example.txt'):
+def interpret(input_file: str='output/examples/ex1.Nested expression'):
     with open(input_file, 'r') as f:
         code = f.read()
     lexer = GrammarLexer(InputStream(code))
