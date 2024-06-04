@@ -11,14 +11,14 @@ sqrt: SQRT PAR_LEFT expression PAR_RIGHT;
 root: ROOT PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
 log: LOG PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
 
-vector: BRACKET_LEFT NUMBER ' ' (COMMA ' ' NUMBER)* BRACKET_RIGHT;
-matrix: BRACKET_LEFT vector ' ' (COMMA ' ' vector)* BRACKET_RIGHT;
+vector: BRACKET_LEFT NUMBER (COMMA ' ' NUMBER)* BRACKET_RIGHT;
+matrix: BRACKET_LEFT vector (COMMA ' ' vector)* BRACKET_RIGHT;
 
 trig_func: sin | cos;
 
-built_in_func: trig_func | sin | cos | sqrt | root | log;
+built_in_func: trig_func | sqrt | root | log | exp_func | abs_func | ceil_func | floor_func;
 
-expression: built_in_func | matrix | vector | NUMBER;
+expression: built_in_func | matrix | vector | VARIABLE | NUMBER;
 
 exp_func: EXP PAR_LEFT expression PAR_RIGHT;
 abs_func: ABS PAR_LEFT expression PAR_RIGHT;
@@ -98,7 +98,7 @@ ELSE: 'else';
 PRINT: 'print';
 FOR: 'for';
 
-NUMBER: [0-9].?[0-9]*;
+NUMBER: [0-9][.]?[0-9]*;
 
 SPACE: ' ';
 NEWLINE: '\n';
