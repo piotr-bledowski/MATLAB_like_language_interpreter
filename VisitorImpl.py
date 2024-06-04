@@ -10,20 +10,35 @@ class VisitorImpl(GrammarVisitor):
         return self.visitChildren(ctx)
 
     def visitAssignment_statement(self, ctx:GrammarParser.Assignment_statementContext):
+        var = None
+        val = None
+
         for child in ctx.children:
             print(f'{child} ({type(child)})')
             if isinstance(child, GrammarParser.VariableContext):
                 print(f'{child.getChild(0).getChild(0)} ({type(child.getChild(0).getChild(0))})')
+                var = str(child.getChild(0).getChild(0))
+            elif isinstance(child, GrammarParser.MatrixContext):
+                pass
+            elif isinstance(child, GrammarParser.ExpressionContext):
+                val = self.visitExpression(child)
+
+        self.variables[var] = val
+        print(f'{var}: {val}')
         return self.visitChildren(ctx)
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
-        # for child in ctx.children:
-        #     print(f'{child} ({type(child)})')
+        l = 0
+        r = 0
+        for child in ctx.children:
+            print(f'{child} ({type(child)})')
         return self.visitChildren(ctx)
 
     def visitMultiplication(self, ctx:GrammarParser.MultiplicationContext):
         #print(self.visitChildren(ctx))
         return self.visitChildren(ctx)
+
+
 
     # def visitOperation(self, ctx:GrammarParser.OperationContext):
     #     if ctx.getChildCount() == 1:
