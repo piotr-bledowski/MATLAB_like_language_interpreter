@@ -50,7 +50,7 @@ func_statement: FUNC SPACE* PAR_LEFT SPACE* params SPACE* PAR_RIGHT SPACE* BRACE
 if_statement: IF SPACE* condition SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT | IF SPACE* condition SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT SPACE* else_statement;
 else_statement: ELSE SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
 for_statement: FOR SPACE* variable_vec SPACE* ASSIGNMENT SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
-print_statement: PRINT PAR_LEFT expression PAR_RIGHT;
+print_statement: PRINT SPACE* expression SPACE* ')';
 
 condition: expression SPACE* logic_op SPACE* expression;
 
@@ -105,7 +105,7 @@ MAT_ID: [A-Z][a-zA-Z0-9_]*;
 FUNC: 'func';
 IF: 'if';
 ELSE: 'else';
-PRINT: 'print';
+PRINT: 'print(';
 FOR: 'for';
 
 NUMBER: [0-9][.]?[0-9]*;
