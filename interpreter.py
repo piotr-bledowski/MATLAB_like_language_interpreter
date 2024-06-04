@@ -52,7 +52,7 @@ def interpret(input_file: str='output/examples/ex1.Nested expression'):
     interpreter = VisitorImpl()
     interpreter.visit(tree)
 
-interpret()
+interpret('example2.txt')
 
 
 def parse_file_to_nested_list(input_file='simple_example.txt'):

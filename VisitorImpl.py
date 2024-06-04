@@ -6,9 +6,19 @@ class VisitorImpl(GrammarVisitor):
     def __init__(self):
         self.variables = {}
 
-    def visitAddition(self, ctx:GrammarParser.AdditionContext):
+    def visitPrint_statement(self, ctx:GrammarParser.Print_statementContext):
+        return self.visitChildren(ctx)
+
+    def visitAssignment_statement(self, ctx:GrammarParser.Assignment_statementContext):
         for child in ctx.children:
             print(f'{child} ({type(child)})')
+            if isinstance(child, GrammarParser.VariableContext):
+                print(f'{child.getChild(0).getChild(0)} ({type(child.getChild(0).getChild(0))})')
+        return self.visitChildren(ctx)
+
+    def visitAddition(self, ctx:GrammarParser.AdditionContext):
+        # for child in ctx.children:
+        #     print(f'{child} ({type(child)})')
         return self.visitChildren(ctx)
 
     def visitMultiplication(self, ctx:GrammarParser.MultiplicationContext):
