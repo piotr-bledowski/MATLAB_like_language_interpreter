@@ -35,6 +35,15 @@ class GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by GrammarParser#multiplication.
+    def enterMultiplication(self, ctx:GrammarParser.MultiplicationContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#multiplication.
+    def exitMultiplication(self, ctx:GrammarParser.MultiplicationContext):
+        pass
+
+
     # Enter a parse tree produced by GrammarParser#matmul.
     def enterMatmul(self, ctx:GrammarParser.MatmulContext):
         pass
@@ -122,6 +131,15 @@ class GrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by GrammarParser#trig_func.
     def exitTrig_func(self, ctx:GrammarParser.Trig_funcContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#scalar_op.
+    def enterScalar_op(self, ctx:GrammarParser.Scalar_opContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#scalar_op.
+    def exitScalar_op(self, ctx:GrammarParser.Scalar_opContext):
         pass
 
 

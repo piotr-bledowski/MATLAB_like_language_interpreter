@@ -3,7 +3,8 @@ grammar Grammar;
 program: statements+EOF;
 
 addition: (NUMBER | variable) SPACE* PLUS SPACE* (NUMBER | variable);
-subtraction: (NUMBER | variable) SPACE* MINUS SPACE* (NUMBER | variable);
+subtraction: (NUMBER | variable | addition) SPACE* MINUS SPACE* (NUMBER | variable | addition);
+multiplication: (NUMBER | variable | addition | subtraction) SPACE* MULTIPLICATION SPACE* (NUMBER | variable | addition | subtraction);
 matmul: (matrix | variable_mat) SPACE* MULTIPLICATION SPACE* (matrix | variable_mat);
 dot_product: (vector | variable_vec) SPACE* MULTIPLICATION SPACE* (vector | variable_vec);
 
@@ -18,7 +19,9 @@ matrix: BRACKET_LEFT vector (COMMA SPACE* vector)* BRACKET_RIGHT;
 
 trig_func: sin | cos;
 
-operation: matmul | dot_product | addition | subtraction;
+scalar_op: addition | subtraction | multiplication;
+
+operation: matmul | dot_product | scalar_op;
 
 built_in_func: trig_func | sqrt | root | log | exp_func | abs_func | ceil_func | floor_func;
 

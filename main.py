@@ -45,6 +45,6 @@ def nested_list_to_tuple(nested_list):
 
 if __name__ == "__main__":
     main()
-    tree_list = nested_list_to_tuple(parse_file_to_nested_list('example.txt'))
+    tree_list = nested_list_to_tuple(parse_file_to_nested_list('output/examples/ex1.Nested expression'))
     dot = create_parser_tree(tree_list, "what")
     dot.render('what', format='png', cleanup=True)
