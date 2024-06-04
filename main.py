@@ -1,6 +1,10 @@
 from graphviz import Digraph
 import os
-from interpreter import parse_file_to_nested_list
+from interpreter import read_file
+from GrammarLexer import GrammarLexer
+from GrammarParser import GrammarParser
+from GrammarVisitor import GrammarVisitor
+from antlr4 import *
 
 def create_parser_tree(tree, name):
     dot = Digraph(name)
@@ -19,6 +23,16 @@ def add_nodes(dot, tree, parent=None):
         else:
             dot.node(str(id(child)), str(child))
             dot.edge(node_id, str(id(child)))
+
+class TreeToNestedListVisitor(GrammarVisitor):
+    def visitChildren(self, node):
+        result = [node.__class__.__name__]
+        for child in node.getChildren():
+            result.append(self.visit(child))
+        return result
+
+    def visitTerminal(self, node):
+        return node.getText()
 
 def main():
     output_dir = "output"
@@ -43,12 +57,26 @@ def nested_list_to_tuple(nested_list):
         return tuple(nested_list_to_tuple(item) for item in nested_list)
     return nested_list
 
-def generateTree(path: str='example2.txt'):
-    tree_list = nested_list_to_tuple(parse_file_to_nested_list(path))
+def generateTree(code: str):
+    tree_list = nested_list_to_tuple(parse_code_to_nested_list(code))
     dot = create_parser_tree(tree_list, "what")
     dot.render('what', format='png', cleanup=True)
 
+def parse_code_to_nested_list(code: str):
+    lexer = GrammarLexer(InputStream(code))
+    token_stream = CommonTokenStream(lexer)
+    parser = GrammarParser(token_stream)
+
+    # Parse the input to get the parse tree
+    parse_tree = parser.program()  # Assuming 'program' is the start rule in Matlab.g4
+
+    # Use the visitor to convert the parse tree to a nested list
+    visitor = TreeToNestedListVisitor()
+    nested_list = visitor.visit(parse_tree)
+
+    return nested_list
+
 if __name__ == "__main__":
     main()
-    generateTree()
+    generateTree(read_file('example2.txt'))
 
