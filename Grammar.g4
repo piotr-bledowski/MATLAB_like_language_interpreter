@@ -11,14 +11,14 @@ sqrt: SQRT PAR_LEFT expression PAR_RIGHT;
 root: ROOT PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
 log: LOG PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
 
-vector: BRACKET_LEFT NUMBER SPACE* (COMMA SPACE* NUMBER)* BRACKET_RIGHT;
-matrix: BRACKET_LEFT vector SPACE* (COMMA SPACE* vector)* BRACKET_RIGHT;
+vector: BRACKET_LEFT NUMBER ' ' (COMMA ' ' NUMBER)* BRACKET_RIGHT;
+matrix: BRACKET_LEFT vector ' ' (COMMA ' ' vector)* BRACKET_RIGHT;
 
 trig_func: sin | cos;
 
 built_in_func: trig_func | sin | cos | sqrt | root | log;
 
-expression: built_in_func | NUMBER | vector | matrix;
+expression: built_in_func | matrix | vector | NUMBER;
 
 exp_func: EXP PAR_LEFT expression PAR_RIGHT;
 abs_func: ABS PAR_LEFT expression PAR_RIGHT;
@@ -35,20 +35,20 @@ cosh_func: COSH PAR_LEFT expression PAR_RIGHT;
 factorial_func: expression FACTORIAL;
 modulo_op: expression MOD expression;
 
-params: param SPACE* (COMMA SPACE* param)* | empty;
+params: param ' ' (COMMA ' ' param)* | empty;
 param: VARIABLE | VARIABLE ASSIGNMENT expression;
 empty: ;
 statements: statement | statement statements;
 statement: (assignment_statement | expression | if_statement | for_statement | print_statement | func_statement)? NEWLINE;
 
-assignment_statement: VARIABLE SPACE* ASSIGNMENT SPACE* expression;
-func_statement: FUNCTION SPACE* PAR_LEFT SPACE* params SPACE* PAR_RIGHT SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
-if_statement: IF SPACE* condition SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT | IF SPACE* condition SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT SPACE* else_statement;
-else_statement: ELSE SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
-for_statement: FOR SPACE* VARIABLE SPACE* ASSIGNMENT SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
+assignment_statement: VARIABLE ' ' ASSIGNMENT ' ' expression;
+func_statement: FUNC ' ' PAR_LEFT ' ' params ' ' PAR_RIGHT ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT;
+if_statement: IF ' ' condition ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT | IF ' ' condition ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT ' ' else_statement;
+else_statement: ELSE ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT;
+for_statement: FOR ' ' VARIABLE ' ' ASSIGNMENT ' ' expression ' ' SEMICOLON ' ' expression ' ' SEMICOLON ' ' expression ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT;
 print_statement: PRINT PAR_LEFT expression PAR_RIGHT;
 
-condition: expression SPACE* logic_op SPACE* expression;
+condition: expression ' ' logic_op ' ' expression;
 
 logic_op: EQUALS | NOT_EQUALS | LESS_THAN | GREATER_THAN | LESS_THAN_EQUALS | GREATER_THAN_EQUALS;
 
@@ -56,6 +56,7 @@ PLUS: '+';
 MINUS: '-';
 MULTIPLICATION: '*';
 DIVISION: '/';
+MOD: '%';
 POWER: '^';
 EQUALS: '=';
 NOT_EQUALS: '<>';
@@ -67,11 +68,20 @@ ASSIGNMENT: ':=';
 FACTORIAL: '!';
 COMMA: ',';
 
+EXP: 'exp';
+ABS: 'abs';
+CEIL: 'ceil';
+FLOOR: 'floor';
 SIN: 'sin';
 COS: 'cos';
 LOG: 'log';
 SQRT: 'sqrt';
 ROOT: 'root';
+SINH: 'sinh';
+COSH: 'cosh';
+ARCSIN: 'arcsin';
+ARCCOS: 'arccos';
+ARCTAN: 'arctan';
 
 PAR_LEFT: '(';
 PAR_RIGHT: ')';
@@ -86,6 +96,7 @@ FUNC: 'func';
 IF: 'if';
 ELSE: 'else';
 PRINT: 'print';
+FOR: 'for';
 
 NUMBER: [0-9].?[0-9]*;
 
