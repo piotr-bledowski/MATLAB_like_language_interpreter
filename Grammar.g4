@@ -22,7 +22,7 @@ operation: matmul | dot_product | addition | subtraction;
 
 built_in_func: trig_func | sqrt | root | log | exp_func | abs_func | ceil_func | floor_func;
 
-expression: built_in_func | matrix | vector | variable | NUMBER;
+expression: built_in_func | operation | matrix | vector | variable | NUMBER;
 
 exp_func: EXP PAR_LEFT expression PAR_RIGHT;
 abs_func: ABS PAR_LEFT expression PAR_RIGHT;
