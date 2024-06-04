@@ -40,10 +40,13 @@ def print_tree(node, indent=0):
         for child in node.getChildren():
             print_tree(child, indent + 2)
 
-
-def interpret(input_file: str='output/examples/ex1.Nested expression'):
+def read_file(input_file: str='example2.txt'):
+    r = ''
     with open(input_file, 'r') as f:
-        code = f.read()
+        r = f.read()
+    return r
+
+def interpret(code: str) -> str:
     lexer = GrammarLexer(InputStream(code))
     tokens = CommonTokenStream(lexer)
     parser = GrammarParser(tokens)
@@ -51,8 +54,9 @@ def interpret(input_file: str='output/examples/ex1.Nested expression'):
     #print_tree(tree)
     interpreter = VisitorImpl()
     interpreter.visit(tree)
+    return interpreter.output
 
-interpret('example2.txt')
+print(interpret(read_file()))
 
 
 def parse_file_to_nested_list(input_file='simple_example.txt'):

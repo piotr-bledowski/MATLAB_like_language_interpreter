@@ -1,10 +1,12 @@
 from GrammarParser import GrammarParser
 from GrammarVisitor import GrammarVisitor
+from antlr4.tree.Tree import TerminalNodeImpl
 import numpy as np
 
 class VisitorImpl(GrammarVisitor):
     def __init__(self):
         self.variables = {}
+        self.output = ''
 
     def visitPrint_statement(self, ctx:GrammarParser.Print_statementContext):
         return self.visitChildren(ctx)
@@ -38,6 +40,12 @@ class VisitorImpl(GrammarVisitor):
         #print(self.visitChildren(ctx))
         return self.visitChildren(ctx)
 
+    def visitPrint_statement(self, ctx: GrammarParser.Print_statementContext):
+        for child in ctx.children:
+            if isinstance(child, GrammarParser.ExpressionContext):
+                self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
+
+        return self.visitChildren(ctx)
 
 
     # def visitOperation(self, ctx:GrammarParser.OperationContext):
