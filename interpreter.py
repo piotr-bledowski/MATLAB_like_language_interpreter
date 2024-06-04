@@ -3,6 +3,7 @@ from antlr4.tree.Tree import TerminalNodeImpl
 from GrammarLexer import GrammarLexer
 from GrammarParser import GrammarParser
 from GrammarVisitor import GrammarVisitor
+from VisitorImpl import VisitorImpl
 
 
 # def print_tree(node, indent=0):
@@ -47,11 +48,11 @@ def interpret(input_file: str='simple_example.txt'):
     tokens = CommonTokenStream(lexer)
     parser = GrammarParser(tokens)
     tree = parser.program()
-    print_tree(tree)
-    # interpreter = GrammarVisitor()
-    # interpreter.visit(tree)
+    #print_tree(tree)
+    interpreter = VisitorImpl()
+    interpreter.visit(tree)
 
-#interpret()
+interpret()
 
 
 def parse_file_to_nested_list(input_file='simple_example.txt'):
@@ -70,4 +71,4 @@ def parse_file_to_nested_list(input_file='simple_example.txt'):
 
     return nested_list
 
-print(parse_file_to_nested_list())
+#print(parse_file_to_nested_list())
