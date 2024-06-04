@@ -2,8 +2,10 @@ grammar Grammar;
 
 program: statements+EOF;
 
-matmul: matrix MULTIPLICATION matrix;
-dot_product: vector MULTIPLICATION vector;
+addition: (NUMBER | variable) SPACE* PLUS SPACE* (NUMBER | variable);
+subtraction: (NUMBER | variable) SPACE* MINUS SPACE* (NUMBER | variable);
+matmul: (matrix | variable_mat) SPACE* MULTIPLICATION SPACE* (matrix | variable_mat);
+dot_product: (vector | variable_vec) SPACE* MULTIPLICATION SPACE* (vector | variable_vec);
 
 sin: SIN PAR_LEFT expression PAR_RIGHT;
 cos: COS PAR_LEFT expression PAR_RIGHT;
@@ -11,14 +13,16 @@ sqrt: SQRT PAR_LEFT expression PAR_RIGHT;
 root: ROOT PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
 log: LOG PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
 
-vector: BRACKET_LEFT NUMBER (COMMA ' ' NUMBER)* BRACKET_RIGHT;
-matrix: BRACKET_LEFT vector (COMMA ' ' vector)* BRACKET_RIGHT;
+vector: BRACKET_LEFT NUMBER (COMMA SPACE* NUMBER)* BRACKET_RIGHT;
+matrix: BRACKET_LEFT vector (COMMA SPACE* vector)* BRACKET_RIGHT;
 
 trig_func: sin | cos;
 
+operation: matmul | dot_product | addition | subtraction;
+
 built_in_func: trig_func | sqrt | root | log | exp_func | abs_func | ceil_func | floor_func;
 
-expression: built_in_func | matrix | vector | VARIABLE | NUMBER;
+expression: built_in_func | matrix | vector | variable | NUMBER;
 
 exp_func: EXP PAR_LEFT expression PAR_RIGHT;
 abs_func: ABS PAR_LEFT expression PAR_RIGHT;
@@ -35,20 +39,20 @@ cosh_func: COSH PAR_LEFT expression PAR_RIGHT;
 factorial_func: expression FACTORIAL;
 modulo_op: expression MOD expression;
 
-params: param ' ' (COMMA ' ' param)* | empty;
-param: VARIABLE | VARIABLE ASSIGNMENT expression;
+params: param SPACE* (COMMA SPACE* param)* | empty;
+param: variable | variable ASSIGNMENT expression;
 empty: ;
 statements: statement | statement statements;
 statement: (assignment_statement | expression | if_statement | for_statement | print_statement | func_statement)? NEWLINE;
 
-assignment_statement: VARIABLE ' ' ASSIGNMENT ' ' expression;
-func_statement: FUNC ' ' PAR_LEFT ' ' params ' ' PAR_RIGHT ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT;
-if_statement: IF ' ' condition ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT | IF ' ' condition ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT ' ' else_statement;
-else_statement: ELSE ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT;
-for_statement: FOR ' ' VARIABLE ' ' ASSIGNMENT ' ' expression ' ' SEMICOLON ' ' expression ' ' SEMICOLON ' ' expression ' ' BRACE_LEFT ' ' statements ' ' BRACE_RIGHT;
+assignment_statement: variable SPACE* ASSIGNMENT SPACE* expression;
+func_statement: FUNC SPACE* PAR_LEFT SPACE* params SPACE* PAR_RIGHT SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
+if_statement: IF SPACE* condition SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT | IF SPACE* condition SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT SPACE* else_statement;
+else_statement: ELSE SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
+for_statement: FOR SPACE* variable_vec SPACE* ASSIGNMENT SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
 print_statement: PRINT PAR_LEFT expression PAR_RIGHT;
 
-condition: expression ' ' logic_op ' ' expression;
+condition: expression SPACE* logic_op SPACE* expression;
 
 logic_op: EQUALS | NOT_EQUALS | LESS_THAN | GREATER_THAN | LESS_THAN_EQUALS | GREATER_THAN_EQUALS;
 
@@ -91,7 +95,13 @@ BRACKET_LEFT: '[';
 BRACKET_RIGHT: ']';
 SEMICOLON: ';';
 
-VARIABLE: [a-zA-Z_][a-zA-Z0-9_]*;
+variable: variable_vec | variable_mat;
+variable_vec: VEC_ID;
+variable_mat: MAT_ID;
+
+VEC_ID: [a-z_][a-zA-Z0-9_]*;
+MAT_ID: [A-Z][a-zA-Z0-9_]*;
+
 FUNC: 'func';
 IF: 'if';
 ELSE: 'else';

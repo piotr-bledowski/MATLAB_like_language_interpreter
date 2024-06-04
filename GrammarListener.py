@@ -17,6 +17,24 @@ class GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by GrammarParser#addition.
+    def enterAddition(self, ctx:GrammarParser.AdditionContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#addition.
+    def exitAddition(self, ctx:GrammarParser.AdditionContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#subtraction.
+    def enterSubtraction(self, ctx:GrammarParser.SubtractionContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#subtraction.
+    def exitSubtraction(self, ctx:GrammarParser.SubtractionContext):
+        pass
+
+
     # Enter a parse tree produced by GrammarParser#matmul.
     def enterMatmul(self, ctx:GrammarParser.MatmulContext):
         pass
@@ -104,6 +122,15 @@ class GrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by GrammarParser#trig_func.
     def exitTrig_func(self, ctx:GrammarParser.Trig_funcContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#operation.
+    def enterOperation(self, ctx:GrammarParser.OperationContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#operation.
+    def exitOperation(self, ctx:GrammarParser.OperationContext):
         pass
 
 
@@ -338,6 +365,33 @@ class GrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by GrammarParser#logic_op.
     def exitLogic_op(self, ctx:GrammarParser.Logic_opContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#variable.
+    def enterVariable(self, ctx:GrammarParser.VariableContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#variable.
+    def exitVariable(self, ctx:GrammarParser.VariableContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#variable_vec.
+    def enterVariable_vec(self, ctx:GrammarParser.Variable_vecContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#variable_vec.
+    def exitVariable_vec(self, ctx:GrammarParser.Variable_vecContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#variable_mat.
+    def enterVariable_mat(self, ctx:GrammarParser.Variable_matContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#variable_mat.
+    def exitVariable_mat(self, ctx:GrammarParser.Variable_matContext):
         pass
 
 
