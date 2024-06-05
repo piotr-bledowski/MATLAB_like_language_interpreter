@@ -12,9 +12,14 @@ class VisitorImpl(GrammarVisitor):
     def __init__(self):
         self.variables = {}
         self.output = ''
+        self.error_message = ''
 
-    def visitPrint_statement(self, ctx:GrammarParser.Print_statementContext):
-        return self.visitChildren(ctx)
+    def visitChildren(self, node):
+        try:
+            return super().visitChildren(node)
+        except InterpreterError as e:
+            self.error_message = e.message
+            return None
 
     def visitAssignment_statement(self, ctx:GrammarParser.Assignment_statementContext):
         var = None
@@ -59,11 +64,13 @@ class VisitorImpl(GrammarVisitor):
         for child in ctx.children:
             if isinstance(child, GrammarParser.ExpressionContext):
                 if isinstance(child.getChild(0), TerminalNodeImpl):
-                    self.output += f'{str(child.getChild(0))}\n'
-                    print(str(child.getChild(0)))
+                    if child.getChild(0) is not None:
+                        self.output += f'{str(child.getChild(0))}\n'
+                        print(str(child.getChild(0)))
                 elif isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
-                    print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
+                    if self.variables[str(child.getChild(0).getChild(0).getChild(0))] is not None:
+                        self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
+                        print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
                 # else:
                 #     self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
                 #     print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])

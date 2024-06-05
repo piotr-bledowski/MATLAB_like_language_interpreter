@@ -44,9 +44,12 @@ def interpret(code: str) -> str:
     #print_tree(tree)
     interpreter = VisitorImpl()
     interpreter.visit(tree)
-    return interpreter.output
+    out = interpreter.output
+    if interpreter.error_message:
+        out += f'Error encountered: {interpreter.error_message}'
+    return out
 
-interpret(read_file())
+print(interpret(read_file()))
 
 # def parse_file_to_nested_list(input_file='simple_example.txt'):
 #     with open(input_file, 'r') as f:
