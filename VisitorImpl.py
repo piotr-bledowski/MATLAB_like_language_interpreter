@@ -84,13 +84,17 @@ class VisitorImpl(GrammarVisitor):
 
     def visitMultiplication(self, ctx:GrammarParser.MultiplicationContext):
         #print(self.visitChildren(ctx))
-        result = 1
+        result = 1.0
         for child in ctx.children:
             # print(f'{child} ({type(child)})')
-            if is_float(str(child)):
-                result *= int(str(child))
-            elif isinstance(child, GrammarParser.AdditionContext):
-                result *= self.visitAddition(child)
+            if isinstance(child, TerminalNodeImpl):
+                if is_float(str(child)):
+                    result *= float(str(child))
+            elif isinstance(child, GrammarParser.VariableContext):
+                var = self.variables[str(child.getChild(0).getChild(0))]
+                result *= var
+            elif isinstance(child, GrammarParser.MultiplicationContext):
+                result *= self.visitMultiplication(child)
         return result
 
     def visitPrint_statement(self, ctx: GrammarParser.Print_statementContext):
