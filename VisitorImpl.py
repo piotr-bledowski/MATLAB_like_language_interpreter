@@ -39,7 +39,7 @@ class VisitorImpl(GrammarVisitor):
 
         self.variables[var] = val
         #print(f'{var}: {val}')
-        return self.visitChildren(ctx)
+        return val
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
         result = 0
