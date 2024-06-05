@@ -16,9 +16,9 @@ class VisitorImpl(GrammarVisitor):
         val = None
 
         for child in ctx.children:
-            print(f'{child} ({type(child)})')
+            #print(f'{child} ({type(child)})')
             if isinstance(child, GrammarParser.VariableContext):
-                print(f'{child.getChild(0).getChild(0)} ({type(child.getChild(0).getChild(0))})')
+                #print(f'{child.getChild(0).getChild(0)} ({type(child.getChild(0).getChild(0))})')
                 var = str(child.getChild(0).getChild(0))
             elif isinstance(child, GrammarParser.MatrixContext):
                 pass
@@ -26,7 +26,7 @@ class VisitorImpl(GrammarVisitor):
                 val = self.visitExpression(child)
 
         self.variables[var] = val
-        print(f'{var}: {val}')
+        #print(f'{var}: {val}')
         return self.visitChildren(ctx)
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
@@ -53,7 +53,15 @@ class VisitorImpl(GrammarVisitor):
     def visitPrint_statement(self, ctx: GrammarParser.Print_statementContext):
         for child in ctx.children:
             if isinstance(child, GrammarParser.ExpressionContext):
-                self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
+                if isinstance(child.getChild(0), TerminalNodeImpl):
+                    self.output += f'{str(child.getChild(0))}\n'
+                    print(str(child.getChild(0)))
+                elif isinstance(child.getChild(0), GrammarParser.VariableContext):
+                    self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
+                    print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
+                # else:
+                #     self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
+                #     print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
 
         return self.visitChildren(ctx)
 

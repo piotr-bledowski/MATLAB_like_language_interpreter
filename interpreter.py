@@ -46,7 +46,7 @@ def interpret(code: str) -> str:
     interpreter.visit(tree)
     return interpreter.output
 
-print(interpret(read_file()))
+interpret(read_file())
 
 # def parse_file_to_nested_list(input_file='simple_example.txt'):
 #     with open(input_file, 'r') as f:
