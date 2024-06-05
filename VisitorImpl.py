@@ -112,7 +112,31 @@ class VisitorImpl(GrammarVisitor):
                 else:
                     raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
+    def visitLog(self, ctx:GrammarParser.CosContext):
+        for child in ctx.children:
+            if not isinstance(child.getChild(0), TerminalNodeImpl):
+                if isinstance(child.getChild(0), GrammarParser.VariableContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    self.variables[var] = np.log(float(self.variables[var]))
+                    return self.variables[var]
+            else:
+                if is_float(str(child.getChild(0))):
+                    return np.log(float(str(child.getChild(0))))
+                else:
+                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
+    def visitExp_func(self, ctx:GrammarParser.Exp_funcContext):
+        for child in ctx.children:
+            if not isinstance(child.getChild(0), TerminalNodeImpl):
+                if isinstance(child.getChild(0), GrammarParser.VariableContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    self.variables[var] = np.exp(float(self.variables[var]))
+                    return self.variables[var]
+            else:
+                if is_float(str(child.getChild(0))):
+                    return np.exp(float(str(child.getChild(0))))
+                else:
+                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
     # def visitOperation(self, ctx:GrammarParser.OperationContext):
     #     if ctx.getChildCount() == 1:
