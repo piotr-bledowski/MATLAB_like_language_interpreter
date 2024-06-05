@@ -42,11 +42,16 @@ class VisitorImpl(GrammarVisitor):
         return self.visitChildren(ctx)
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
+        print(self.variables)
         result = 0
         for child in ctx.children:
             #print(f'{child} ({type(child)})')
-            if is_float(str(child)):
-                result += float(str(child))
+            if isinstance(child, TerminalNodeImpl):
+                if is_float(str(child)):
+                    result += float(str(child))
+            elif isinstance(child, GrammarParser.VariableContext):
+                var = self.variables[str(child.getChild(0).getChild(0))]
+                result += var
             elif isinstance(child, GrammarParser.MultiplicationContext):
                 result += self.visitMultiplication(child)
         return result
