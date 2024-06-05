@@ -30,15 +30,25 @@ class VisitorImpl(GrammarVisitor):
         return self.visitChildren(ctx)
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
-        l = 0
-        r = 0
+        result = 0
         for child in ctx.children:
-            print(f'{child} ({type(child)})')
-        return self.visitChildren(ctx)
+            #print(f'{child} ({type(child)})')
+            if str(child).isnumeric():
+                result += int(str(child))
+            elif isinstance(child, GrammarParser.MultiplicationContext):
+                result += self.visitMultiplication(child)
+        return result
 
     def visitMultiplication(self, ctx:GrammarParser.MultiplicationContext):
         #print(self.visitChildren(ctx))
-        return self.visitChildren(ctx)
+        result = 1
+        for child in ctx.children:
+            # print(f'{child} ({type(child)})')
+            if str(child).isnumeric():
+                result *= int(str(child))
+            elif isinstance(child, GrammarParser.AdditionContext):
+                result *= self.visitAddition(child)
+        return result
 
     def visitPrint_statement(self, ctx: GrammarParser.Print_statementContext):
         for child in ctx.children:
