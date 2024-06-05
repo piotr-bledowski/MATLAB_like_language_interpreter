@@ -1,19 +1,8 @@
 from GrammarParser import GrammarParser
 from GrammarVisitor import GrammarVisitor
 from antlr4.tree.Tree import TerminalNodeImpl
+from utils import InterpreterError, is_float
 import numpy as np
-
-def is_float(string):
-    try:
-        float(string)
-        return True
-    except ValueError:
-        return False
-
-class InterpreterError(Exception):
-    def __init__(self, message):
-        self.message = message
-        super().__init__(self.message)
 
 class VisitorImpl(GrammarVisitor):
     def __init__(self):
