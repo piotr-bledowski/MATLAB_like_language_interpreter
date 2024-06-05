@@ -395,6 +395,15 @@ class GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by GrammarParser#variable_scalar.
+    def enterVariable_scalar(self, ctx:GrammarParser.Variable_scalarContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#variable_scalar.
+    def exitVariable_scalar(self, ctx:GrammarParser.Variable_scalarContext):
+        pass
+
+
     # Enter a parse tree produced by GrammarParser#variable_vec.
     def enterVariable_vec(self, ctx:GrammarParser.Variable_vecContext):
         pass

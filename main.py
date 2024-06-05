@@ -74,5 +74,5 @@ def parse_code_to_nested_list(code: str):
 
 if __name__ == "__main__":
     main()
-    generateTree(read_file('test_examples/floor_ceil.txt'))
+    generateTree(read_file('test_examples/if.txt'))
 

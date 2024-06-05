@@ -224,6 +224,11 @@ class GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by GrammarParser#variable_scalar.
+    def visitVariable_scalar(self, ctx:GrammarParser.Variable_scalarContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by GrammarParser#variable_vec.
     def visitVariable_vec(self, ctx:GrammarParser.Variable_vecContext):
         return self.visitChildren(ctx)

@@ -170,6 +170,9 @@ class VisitorImpl(GrammarVisitor):
                 else:
                     raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
+    def visitLogic_op(self, ctx:GrammarParser.Logic_opContext):
+        return self.visitChildren(ctx)
+
     # def visitOperation(self, ctx:GrammarParser.OperationContext):
     #     if ctx.getChildCount() == 1:
         #     # Handle single elements (variable or number)
