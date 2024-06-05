@@ -212,6 +212,15 @@ class VisitorImpl(GrammarVisitor):
         else:
             self.visitStatements(ctx.else_body.body)
 
+    def visitFor_statement(self, ctx:GrammarParser.For_statementContext):
+        self.visitAssignment_statement(ctx.init)
+
+        while self.visitCondition(ctx.cond):
+            self.visitStatements(ctx.body)
+            self.visitAssignment_statement(ctx.update)
+
+        #return self.visitChildren(ctx)
+
     def visitCondition(self, ctx:GrammarParser.ConditionContext):
         l = None
         r = None
