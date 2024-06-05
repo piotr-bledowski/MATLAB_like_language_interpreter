@@ -3,6 +3,11 @@ from GrammarVisitor import GrammarVisitor
 from antlr4.tree.Tree import TerminalNodeImpl
 import numpy as np
 
+class InterpreterError(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
 class VisitorImpl(GrammarVisitor):
     def __init__(self):
         self.variables = {}
@@ -34,7 +39,7 @@ class VisitorImpl(GrammarVisitor):
         for child in ctx.children:
             #print(f'{child} ({type(child)})')
             if str(child).isnumeric():
-                result += int(str(child))
+                result += float(str(child))
             elif isinstance(child, GrammarParser.MultiplicationContext):
                 result += self.visitMultiplication(child)
         return result
@@ -65,6 +70,18 @@ class VisitorImpl(GrammarVisitor):
 
         return self.visitChildren(ctx)
 
+    def visitSin(self, ctx:GrammarParser.SinContext):
+        for child in ctx.children:
+            if not isinstance(child.getChild(0), TerminalNodeImpl):
+                if isinstance(child.getChild(0), GrammarParser.VariableContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    self.variables[var] = np.sin(float(self.variables[var]))
+                    return self.variables[var]
+            else:
+                if str(child.getChild(0)).isnumeric():
+                    return np.sin(float(str(child.getChild(0))))
+                else:
+                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
     # def visitOperation(self, ctx:GrammarParser.OperationContext):
     #     if ctx.getChildCount() == 1:
