@@ -60,11 +60,23 @@ class VisitorImpl(GrammarVisitor):
         r = None
         for child in ctx.children:
             # print(f'{child} ({type(child)})')
-            if is_float(str(child)):
+            if isinstance(child, TerminalNodeImpl):
+                if is_float(str(child)):
+                    if l is None:
+                        l = float(str(child))
+                    elif r is None:
+                        r = float(str(child))
+            elif isinstance(child, GrammarParser.VariableContext):
+                var = self.variables[str(child.getChild(0).getChild(0))]
                 if l is None:
-                    l = float(str(child))
+                    l = var
                 elif r is None:
-                    r = float(str(child))
+                    r = var
+            elif isinstance(child, GrammarParser.MultiplicationContext):
+                if l is None:
+                    l = self.visitMultiplication(child)
+                elif r is None:
+                    r = self.visitMultiplication(child)
 
         return l - r
 
