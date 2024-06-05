@@ -29,7 +29,13 @@ class VisitorImpl(GrammarVisitor):
             elif isinstance(child, GrammarParser.MatrixContext):
                 pass
             elif isinstance(child, GrammarParser.ExpressionContext):
-                val = self.visitExpression(child)
+                if isinstance(child.getChild(0), TerminalNodeImpl):
+                    if is_float(str(child.getChild(0))):
+                        val = float(str(child.getChild(0)))
+                    else:
+                        raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                else:
+                    val = self.visitExpression(child)
 
         self.variables[var] = val
         #print(f'{var}: {val}')
@@ -67,9 +73,9 @@ class VisitorImpl(GrammarVisitor):
                     if self.variables[str(child.getChild(0).getChild(0).getChild(0))] is not None:
                         self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
                         print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
-                # else:
-                #     self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
-                #     print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
+                elif isinstance(child.getChild(0), GrammarParser.Built_in_funcContext):
+                    self.output += f'{self.visitBuilt_in_func(child.getChild(0))}\n'
+                    print(str(self.visitBuilt_in_func(child.getChild(0))))
 
         return self.visitChildren(ctx)
 
@@ -135,6 +141,32 @@ class VisitorImpl(GrammarVisitor):
             else:
                 if is_float(str(child.getChild(0))):
                     return np.exp(float(str(child.getChild(0))))
+                else:
+                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+
+    def visitFloor_func(self, ctx:GrammarParser.Floor_funcContext):
+        for child in ctx.children:
+            if not isinstance(child.getChild(0), TerminalNodeImpl):
+                if isinstance(child.getChild(0), GrammarParser.VariableContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    self.variables[var] = np.floor(float(self.variables[var]))
+                    return self.variables[var]
+            else:
+                if is_float(str(child.getChild(0))):
+                    return np.floor(float(str(child.getChild(0))))
+                else:
+                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+
+    def visitCeil_func(self, ctx:GrammarParser.Floor_funcContext):
+        for child in ctx.children:
+            if not isinstance(child.getChild(0), TerminalNodeImpl):
+                if isinstance(child.getChild(0), GrammarParser.VariableContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    self.variables[var] = np.ceil(float(self.variables[var]))
+                    return self.variables[var]
+            else:
+                if is_float(str(child.getChild(0))):
+                    return np.ceil(float(str(child.getChild(0))))
                 else:
                     raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
