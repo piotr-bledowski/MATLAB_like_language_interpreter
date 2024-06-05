@@ -99,6 +99,21 @@ class VisitorImpl(GrammarVisitor):
                 else:
                     raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
+    def visitSqrt(self, ctx:GrammarParser.CosContext):
+        for child in ctx.children:
+            if not isinstance(child.getChild(0), TerminalNodeImpl):
+                if isinstance(child.getChild(0), GrammarParser.VariableContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    self.variables[var] = np.sqrt(float(self.variables[var]))
+                    return self.variables[var]
+            else:
+                if is_float(str(child.getChild(0))):
+                    return np.sqrt(float(str(child.getChild(0))))
+                else:
+                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+
+
+
     # def visitOperation(self, ctx:GrammarParser.OperationContext):
     #     if ctx.getChildCount() == 1:
         #     # Handle single elements (variable or number)
