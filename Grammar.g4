@@ -46,12 +46,12 @@ params: param SPACE* (COMMA SPACE* param)* | empty;
 param: variable | variable ASSIGNMENT expression;
 empty: ;
 statements: statement | statement statements;
-statement: (assignment_statement | expression | if_statement | for_statement | print_statement | func_statement)? NEWLINE;
+statement: SPACE* (assignment_statement | expression | if_statement | for_statement | print_statement | func_statement)? NEWLINE;
 
 assignment_statement: variable SPACE* ASSIGNMENT SPACE* expression;
 func_statement: FUNC SPACE* PAR_LEFT SPACE* params SPACE* PAR_RIGHT SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
-if_statement: IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* statements NEWLINE* BRACE_RIGHT | IF SPACE* cond=condition SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT SPACE* else_statement;
-else_statement: ELSE SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
+if_statement: IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* statements NEWLINE* BRACE_RIGHT | IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* statements SPACE* BRACE_RIGHT SPACE* NEWLINE* else_statement;
+else_statement: ELSE SPACE* NEWLINE* statements NEWLINE* '}';
 for_statement: FOR SPACE* assignment_statement SPACE* SEMICOLON SPACE* cond=expression SPACE* SEMICOLON SPACE* update=expression SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
 print_statement: PRINT SPACE* expression SPACE* ')';
 
@@ -108,7 +108,7 @@ MAT_ID: [A-Z][a-zA-Z0-9_]*;
 
 FUNC: 'func';
 IF: 'if (';
-ELSE: 'else';
+ELSE: 'else {';
 PRINT: 'print(';
 FOR: 'for';
 
