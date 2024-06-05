@@ -171,7 +171,11 @@ class VisitorImpl(GrammarVisitor):
                     raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
     def visitIf_statement(self, ctx:GrammarParser.If_statementContext):
-        pass
+        cond_value = self.visitCondition(ctx.cond)
+        if cond_value:
+            self.visitStatements(ctx.if_body)
+        else:
+            self.visitStatements(ctx.else_body.body)
 
     def visitCondition(self, ctx:GrammarParser.ConditionContext):
         l = None
