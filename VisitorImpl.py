@@ -84,8 +84,8 @@ class VisitorImpl(GrammarVisitor):
             if not isinstance(child.getChild(0), TerminalNodeImpl):
                 if isinstance(child.getChild(0), GrammarParser.VariableContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    self.variables[var] = np.sin(float(self.variables[var]))
-                    return self.variables[var]
+                    #self.variables[var] = np.sin(float(self.variables[var]))
+                    return np.sin(float(self.variables[var]))
             else:
                 if is_float(str(child.getChild(0))):
                     return np.sin(float(str(child.getChild(0))))
@@ -97,8 +97,8 @@ class VisitorImpl(GrammarVisitor):
             if not isinstance(child.getChild(0), TerminalNodeImpl):
                 if isinstance(child.getChild(0), GrammarParser.VariableContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    self.variables[var] = np.cos(float(self.variables[var]))
-                    return self.variables[var]
+                    #self.variables[var] = np.cos(float(self.variables[var]))
+                    return np.cos(float(self.variables[var]))
             else:
                 if is_float(str(child.getChild(0))):
                     return np.cos(float(str(child.getChild(0))))
@@ -110,8 +110,8 @@ class VisitorImpl(GrammarVisitor):
             if not isinstance(child.getChild(0), TerminalNodeImpl):
                 if isinstance(child.getChild(0), GrammarParser.VariableContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    self.variables[var] = np.sqrt(float(self.variables[var]))
-                    return self.variables[var]
+                    #self.variables[var] = np.sqrt(float(self.variables[var]))
+                    return np.sqrt(float(self.variables[var]))
             else:
                 if is_float(str(child.getChild(0))):
                     return np.sqrt(float(str(child.getChild(0))))
@@ -123,8 +123,8 @@ class VisitorImpl(GrammarVisitor):
             if not isinstance(child.getChild(0), TerminalNodeImpl):
                 if isinstance(child.getChild(0), GrammarParser.VariableContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    self.variables[var] = np.log(float(self.variables[var]))
-                    return self.variables[var]
+                    #self.variables[var] = np.log(float(self.variables[var]))
+                    return np.log(float(self.variables[var]))
             else:
                 if is_float(str(child.getChild(0))):
                     return np.log(float(str(child.getChild(0))))
@@ -136,8 +136,8 @@ class VisitorImpl(GrammarVisitor):
             if not isinstance(child.getChild(0), TerminalNodeImpl):
                 if isinstance(child.getChild(0), GrammarParser.VariableContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    self.variables[var] = np.exp(float(self.variables[var]))
-                    return self.variables[var]
+                    #self.variables[var] = np.exp(float(self.variables[var]))
+                    return np.exp(float(self.variables[var]))
             else:
                 if is_float(str(child.getChild(0))):
                     return np.exp(float(str(child.getChild(0))))
@@ -149,8 +149,8 @@ class VisitorImpl(GrammarVisitor):
             if not isinstance(child.getChild(0), TerminalNodeImpl):
                 if isinstance(child.getChild(0), GrammarParser.VariableContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    self.variables[var] = np.floor(float(self.variables[var]))
-                    return self.variables[var]
+                    #self.variables[var] = np.floor(float(self.variables[var]))
+                    return np.floor(float(self.variables[var]))
             else:
                 if is_float(str(child.getChild(0))):
                     return np.floor(float(str(child.getChild(0))))
@@ -162,8 +162,8 @@ class VisitorImpl(GrammarVisitor):
             if not isinstance(child.getChild(0), TerminalNodeImpl):
                 if isinstance(child.getChild(0), GrammarParser.VariableContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    self.variables[var] = np.ceil(float(self.variables[var]))
-                    return self.variables[var]
+                    #self.variables[var] = np.ceil(float(self.variables[var]))
+                    return np.ceil(float(self.variables[var]))
             else:
                 if is_float(str(child.getChild(0))):
                     return np.ceil(float(str(child.getChild(0))))

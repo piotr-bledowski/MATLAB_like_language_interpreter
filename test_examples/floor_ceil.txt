@@ -4,4 +4,4 @@ print(x)
 
 print(floor(x))
 print(ceil(x))
-print(x)
+
