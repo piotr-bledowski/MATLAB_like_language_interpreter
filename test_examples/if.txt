@@ -1,6 +1,9 @@
-if (3.14 < 2) {
+if (3.14 <= 2) {
     print(1)
 }
 else {
-    print(0)
+    z := cos(0.1)
+    print(z)
+    z := z + 0.1
+    print(z)
 }
