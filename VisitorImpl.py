@@ -39,7 +39,7 @@ class VisitorImpl(GrammarVisitor):
         result = 0
         for child in ctx.children:
             #print(f'{child} ({type(child)})')
-            if str(child).isnumeric():
+            if is_float(str(child)):
                 result += float(str(child))
             elif isinstance(child, GrammarParser.MultiplicationContext):
                 result += self.visitMultiplication(child)
@@ -50,7 +50,7 @@ class VisitorImpl(GrammarVisitor):
         result = 1
         for child in ctx.children:
             # print(f'{child} ({type(child)})')
-            if str(child).isnumeric():
+            if is_float(str(child)):
                 result *= int(str(child))
             elif isinstance(child, GrammarParser.AdditionContext):
                 result *= self.visitAddition(child)
@@ -81,7 +81,7 @@ class VisitorImpl(GrammarVisitor):
                     self.variables[var] = np.sin(float(self.variables[var]))
                     return self.variables[var]
             else:
-                if str(child.getChild(0)).isnumeric():
+                if is_float(str(child.getChild(0))):
                     return np.sin(float(str(child.getChild(0))))
                 else:
                     raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
