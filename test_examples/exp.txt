@@ -1,2 +1,2 @@
-ex := exp(10)
+ex := 2 - 1
 print(ex)

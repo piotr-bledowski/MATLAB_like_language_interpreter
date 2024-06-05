@@ -51,6 +51,21 @@ class VisitorImpl(GrammarVisitor):
                 result += self.visitMultiplication(child)
         return result
 
+    def visitSubtraction(self, ctx:GrammarParser.SubtractionContext):
+        l = None
+        r = None
+        for child in ctx.children:
+            # print(f'{child} ({type(child)})')
+            if is_float(str(child)):
+                if l is None:
+                    l = float(str(child))
+                elif r is None:
+                    r = float(str(child))
+
+        return l - r
+
+
+
     def visitMultiplication(self, ctx:GrammarParser.MultiplicationContext):
         #print(self.visitChildren(ctx))
         result = 1
