@@ -2,9 +2,9 @@ grammar Grammar;
 
 program: statements+EOF;
 
-addition: (NUMBER | variable) SPACE* PLUS SPACE* (NUMBER | variable);
-subtraction: (NUMBER | variable | addition) SPACE* MINUS SPACE* (NUMBER | variable | addition);
-multiplication: (NUMBER | variable | addition | subtraction) SPACE* MULTIPLICATION SPACE* (NUMBER | variable | addition | subtraction);
+addition: (NUMBER | variable | multiplication) SPACE* PLUS SPACE* (NUMBER | variable | multiplication);
+subtraction: (NUMBER | variable | multiplication) SPACE* MINUS SPACE* (NUMBER | variable | multiplication);
+multiplication: (NUMBER | variable) SPACE* MULTIPLICATION SPACE* (NUMBER | variable);
 matmul: (matrix | variable_mat) SPACE* MULTIPLICATION SPACE* (matrix | variable_mat);
 dot_product: (vector | variable_vec) SPACE* MULTIPLICATION SPACE* (vector | variable_vec);
 
