@@ -5,6 +5,7 @@ from GrammarLexer import GrammarLexer
 from GrammarParser import GrammarParser
 from GrammarVisitor import GrammarVisitor
 from antlr4 import *
+from utils import nested_list_to_tuple
 
 def create_parser_tree(tree, name):
     dot = Digraph(name)
@@ -51,11 +52,6 @@ def main():
         dot = create_parser_tree(example_tree, f"example_{i}")
         output_path = os.path.join(output_dir, f"parser_tree_example_{i}.png")
         dot.render(output_path, format="png", cleanup=True)
-
-def nested_list_to_tuple(nested_list):
-    if isinstance(nested_list, list):
-        return tuple(nested_list_to_tuple(item) for item in nested_list)
-    return nested_list
 
 def generateTree(code: str):
     tree_list = nested_list_to_tuple(parse_code_to_nested_list(code))
