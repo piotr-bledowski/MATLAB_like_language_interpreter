@@ -30,7 +30,7 @@ def print_tree(node, indent=0):
         for child in node.getChildren():
             print_tree(child, indent + 2)
 
-def read_file(input_file: str='example2.txt'):
+def read_file(input_file: str='test_examples/example2.txt'):
     r = ''
     with open(input_file, 'r') as f:
         r = f.read()
