@@ -13,3 +13,6 @@ s3 := sin(3.14)
 print(s1)
 print(s2)
 print(s3)
+
+cs := cos(0.001)
+print(cs)
