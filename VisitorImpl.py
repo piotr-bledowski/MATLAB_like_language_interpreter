@@ -3,6 +3,13 @@ from GrammarVisitor import GrammarVisitor
 from antlr4.tree.Tree import TerminalNodeImpl
 import numpy as np
 
+def is_float(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
+
 class InterpreterError(Exception):
     def __init__(self, message):
         self.message = message
