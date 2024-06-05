@@ -42,7 +42,6 @@ class VisitorImpl(GrammarVisitor):
         return self.visitChildren(ctx)
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
-        print(self.variables)
         result = 0
         for child in ctx.children:
             #print(f'{child} ({type(child)})')
@@ -88,14 +87,14 @@ class VisitorImpl(GrammarVisitor):
                 if isinstance(child.getChild(0), TerminalNodeImpl):
                     if child.getChild(0) is not None:
                         self.output += f'{str(child.getChild(0))}\n'
-                        print(str(child.getChild(0)))
+                        #print(str(child.getChild(0)))
                 elif isinstance(child.getChild(0), GrammarParser.VariableContext):
                     if self.variables[str(child.getChild(0).getChild(0).getChild(0))] is not None:
                         self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
-                        print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
+                        #print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
                 elif isinstance(child.getChild(0), GrammarParser.Built_in_funcContext):
                     self.output += f'{self.visitBuilt_in_func(child.getChild(0))}\n'
-                    print(str(self.visitBuilt_in_func(child.getChild(0))))
+                    #print(str(self.visitBuilt_in_func(child.getChild(0))))
 
         return self.visitChildren(ctx)
 
