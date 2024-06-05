@@ -50,9 +50,9 @@ statement: SPACE* (assignment_statement | expression | if_statement | for_statem
 
 assignment_statement: variable SPACE* ASSIGNMENT SPACE* expression;
 func_statement: FUNC SPACE* PAR_LEFT SPACE* params SPACE* PAR_RIGHT SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
-if_statement: IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* statements NEWLINE* BRACE_RIGHT | IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* statements SPACE* BRACE_RIGHT SPACE* NEWLINE* else_statement;
-else_statement: ELSE SPACE* NEWLINE* statements NEWLINE* '}';
-for_statement: FOR SPACE* assignment_statement SPACE* SEMICOLON SPACE* cond=expression SPACE* SEMICOLON SPACE* update=expression SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
+if_statement: IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* if_body=statements NEWLINE* BRACE_RIGHT | IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* if_body=statements SPACE* BRACE_RIGHT SPACE* NEWLINE* else_body=else_statement;
+else_statement: ELSE SPACE* NEWLINE* body=statements NEWLINE* '}';
+for_statement: FOR SPACE* assignment_statement SPACE* SEMICOLON SPACE* cond=expression SPACE* SEMICOLON SPACE* update=expression SPACE* BRACE_LEFT SPACE* body=statements SPACE* BRACE_RIGHT;
 print_statement: PRINT SPACE* expression SPACE* ')';
 
 condition: left=expression SPACE* op=logic_op SPACE* right=expression;

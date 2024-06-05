@@ -3372,6 +3372,8 @@ class GrammarParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.cond = None # ConditionContext
+            self.if_body = None # StatementsContext
+            self.else_body = None # Else_statementContext
 
         def IF(self):
             return self.getToken(GrammarParser.IF, 0)
@@ -3382,15 +3384,15 @@ class GrammarParser ( Parser ):
         def BRACE_LEFT(self):
             return self.getToken(GrammarParser.BRACE_LEFT, 0)
 
-        def statements(self):
-            return self.getTypedRuleContext(GrammarParser.StatementsContext,0)
-
-
         def BRACE_RIGHT(self):
             return self.getToken(GrammarParser.BRACE_RIGHT, 0)
 
         def condition(self):
             return self.getTypedRuleContext(GrammarParser.ConditionContext,0)
+
+
+        def statements(self):
+            return self.getTypedRuleContext(GrammarParser.StatementsContext,0)
 
 
         def SPACE(self, i:int=None):
@@ -3491,7 +3493,7 @@ class GrammarParser ( Parser ):
                     _alt = self._interp.adaptivePredict(self._input,49,self._ctx)
 
                 self.state = 495
-                self.statements()
+                localctx.if_body = self.statements()
                 self.state = 499
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -3559,7 +3561,7 @@ class GrammarParser ( Parser ):
                     _alt = self._interp.adaptivePredict(self._input,54,self._ctx)
 
                 self.state = 532
-                self.statements()
+                localctx.if_body = self.statements()
                 self.state = 536
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -3593,7 +3595,7 @@ class GrammarParser ( Parser ):
                     _la = self._input.LA(1)
 
                 self.state = 552
-                self.else_statement()
+                localctx.else_body = self.else_statement()
                 pass
 
 
@@ -3612,16 +3614,17 @@ class GrammarParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.body = None # StatementsContext
 
         def ELSE(self):
             return self.getToken(GrammarParser.ELSE, 0)
 
+        def BRACE_RIGHT(self):
+            return self.getToken(GrammarParser.BRACE_RIGHT, 0)
+
         def statements(self):
             return self.getTypedRuleContext(GrammarParser.StatementsContext,0)
 
-
-        def BRACE_RIGHT(self):
-            return self.getToken(GrammarParser.BRACE_RIGHT, 0)
 
         def SPACE(self, i:int=None):
             if i is None:
@@ -3687,7 +3690,7 @@ class GrammarParser ( Parser ):
                 _alt = self._interp.adaptivePredict(self._input,60,self._ctx)
 
             self.state = 569
-            self.statements()
+            localctx.body = self.statements()
             self.state = 573
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -3717,6 +3720,7 @@ class GrammarParser ( Parser ):
             self.parser = parser
             self.cond = None # ExpressionContext
             self.update = None # ExpressionContext
+            self.body = None # StatementsContext
 
         def FOR(self):
             return self.getToken(GrammarParser.FOR, 0)
@@ -3734,10 +3738,6 @@ class GrammarParser ( Parser ):
         def BRACE_LEFT(self):
             return self.getToken(GrammarParser.BRACE_LEFT, 0)
 
-        def statements(self):
-            return self.getTypedRuleContext(GrammarParser.StatementsContext,0)
-
-
         def BRACE_RIGHT(self):
             return self.getToken(GrammarParser.BRACE_RIGHT, 0)
 
@@ -3746,6 +3746,10 @@ class GrammarParser ( Parser ):
                 return self.getTypedRuleContexts(GrammarParser.ExpressionContext)
             else:
                 return self.getTypedRuleContext(GrammarParser.ExpressionContext,i)
+
+
+        def statements(self):
+            return self.getTypedRuleContext(GrammarParser.StatementsContext,0)
 
 
         def SPACE(self, i:int=None):
@@ -3867,7 +3871,7 @@ class GrammarParser ( Parser ):
                 _alt = self._interp.adaptivePredict(self._input,68,self._ctx)
 
             self.state = 627
-            self.statements()
+            localctx.body = self.statements()
             self.state = 631
             self._errHandler.sync(self)
             _la = self._input.LA(1)

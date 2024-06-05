@@ -170,8 +170,41 @@ class VisitorImpl(GrammarVisitor):
                 else:
                     raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
 
-    def visitLogic_op(self, ctx:GrammarParser.Logic_opContext):
-        return self.visitChildren(ctx)
+    def visitIf_statement(self, ctx:GrammarParser.If_statementContext):
+        pass
+
+    def visitCondition(self, ctx:GrammarParser.ConditionContext):
+        l = None
+        r = None
+        if isinstance(ctx.left.getChild(0), TerminalNodeImpl):
+            if is_float(str(ctx.left.getChild(0))):
+                l = float(str(ctx.left.getChild(0)))
+            else:
+                raise InterpreterError('Left operand is not a numeric expression')
+        elif isinstance(ctx.left.getChild(0), GrammarParser.VariableContext):
+            l = self.variables[str(ctx.left.getChild(0).getChild(0).getChild(0))]
+
+        if isinstance(ctx.right.getChild(0), TerminalNodeImpl):
+            if is_float(str(ctx.right.getChild(0))):
+                r = float(str(ctx.right.getChild(0)))
+            else:
+                raise InterpreterError('Right operand is not a numeric expression')
+        elif isinstance(ctx.right.getChild(0), GrammarParser.VariableContext):
+            r = self.variables[str(ctx.right.getChild(0).getChild(0).getChild(0))]
+
+        if str(ctx.op.getChild(0)) == '=':
+            return l == r
+        elif str(ctx.op.getChild(0)) == '<>':
+            return l != r
+        elif str(ctx.op.getChild(0)) == '>':
+            return l > r
+        elif str(ctx.op.getChild(0)) == '<':
+            return l < r
+        elif str(ctx.op.getChild(0)) == '>=':
+            return l >= r
+        elif str(ctx.op.getChild(0)) == '<=':
+            return l <= r
+        return None
 
     # def visitOperation(self, ctx:GrammarParser.OperationContext):
     #     if ctx.getChildCount() == 1:
