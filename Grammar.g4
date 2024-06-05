@@ -55,7 +55,7 @@ else_statement: ELSE SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
 for_statement: FOR SPACE* variable_vec SPACE* ASSIGNMENT SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* SEMICOLON SPACE* expression SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
 print_statement: PRINT SPACE* expression SPACE* ')';
 
-condition: expression SPACE* logic_op SPACE* expression;
+condition: left=expression SPACE* op=logic_op SPACE* right=expression;
 
 logic_op: EQUALS | NOT_EQUALS | LESS_THAN | GREATER_THAN | LESS_THAN_EQUALS | GREATER_THAN_EQUALS;
 

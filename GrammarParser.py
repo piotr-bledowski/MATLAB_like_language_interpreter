@@ -3928,6 +3928,9 @@ class GrammarParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.left = None # ExpressionContext
+            self.op = None # Logic_opContext
+            self.right = None # ExpressionContext
 
         def expression(self, i:int=None):
             if i is None:
@@ -3974,7 +3977,7 @@ class GrammarParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 639
-            self.expression()
+            localctx.left = self.expression()
             self.state = 643
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -3986,7 +3989,7 @@ class GrammarParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 646
-            self.logic_op()
+            localctx.op = self.logic_op()
             self.state = 650
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -3998,7 +4001,7 @@ class GrammarParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 653
-            self.expression()
+            localctx.right = self.expression()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
