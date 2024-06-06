@@ -6,6 +6,4 @@ if (3.14 < x) {
 else {
     z := cos(0.1)
     print(z)
-    z := z - 0.1 * 0.1
-    print(z)
 }

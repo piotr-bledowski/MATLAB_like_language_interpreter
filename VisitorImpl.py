@@ -47,6 +47,9 @@ class VisitorImpl(GrammarVisitor):
         #print(f'{var}: {val}')
         return val
 
+    def visitScalar_op(self, ctx:GrammarParser.Scalar_opContext):
+        return self.visitChildren(ctx)
+
     def visitExpression_vec(self, ctx:GrammarParser.Expression_vecContext):
         if isinstance(ctx.getChild(0), GrammarParser.VectorContext):
             return self.visitVector(ctx.getChild(0))
@@ -116,8 +119,8 @@ class VisitorImpl(GrammarVisitor):
             if isinstance(child, TerminalNodeImpl):
                 if is_float(str(child)):
                     result *= float(str(child))
-            elif isinstance(child, GrammarParser.VariableContext):
-                var = self.variables[str(child.getChild(0).getChild(0))]
+            elif isinstance(child, GrammarParser.Variable_scalarContext):
+                var = self.variables[str(child.getChild(0))]
                 result *= var
             elif isinstance(child, GrammarParser.MultiplicationContext):
                 result *= self.visitMultiplication(child)
@@ -136,6 +139,8 @@ class VisitorImpl(GrammarVisitor):
                             self.output += f'{float(str(child.getChild(0).getChild(0)))}'
                         else:
                             raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                    elif isinstance(child.getChild(0).getChild(0), GrammarParser.Scalar_opContext):
+                        self.output += f'{self.visitScalar_op(child.getChild(0).getChild(0))}\n'
                     else:
                         var = str(child.getChild(0).getChild(0).getChild(0))
                         if var is not None:
@@ -152,94 +157,79 @@ class VisitorImpl(GrammarVisitor):
 
     def visitSin(self, ctx:GrammarParser.SinContext):
         for child in ctx.children:
-            if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.Variable_scalarContext):
-                    var = str(child.getChild(0).getChild(0))
+            if not isinstance(child, TerminalNodeImpl):
+                if isinstance(child, GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0))
                     #self.variables[var] = np.sin(float(self.variables[var]))
                     return np.sin(float(self.variables[var]))
             else:
-                if is_float(str(child.getChild(0))):
-                    return np.sin(float(str(child.getChild(0))))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                if is_float(str(child)):
+                    return np.sin(float(str(child)))
 
     def visitCos(self, ctx:GrammarParser.CosContext):
         for child in ctx.children:
-            if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
+            if not isinstance(child, TerminalNodeImpl):
+                if isinstance(child, GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0))
                     #self.variables[var] = np.cos(float(self.variables[var]))
                     return np.cos(float(self.variables[var]))
             else:
-                if is_float(str(child.getChild(0))):
-                    return np.cos(float(str(child.getChild(0))))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                if is_float(str(child)):
+                    return np.cos(float(str(child)))
 
     def visitSqrt(self, ctx:GrammarParser.CosContext):
         for child in ctx.children:
-            if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
+            if not isinstance(child, TerminalNodeImpl):
+                if isinstance(child, GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0))
                     #self.variables[var] = np.sqrt(float(self.variables[var]))
                     return np.sqrt(float(self.variables[var]))
             else:
-                if is_float(str(child.getChild(0))):
-                    return np.sqrt(float(str(child.getChild(0))))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                if is_float(str(child)):
+                    return np.sqrt(float(str(child)))
 
     def visitLog(self, ctx:GrammarParser.CosContext):
         for child in ctx.children:
-            if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
-                    #self.variables[var] = np.log(float(self.variables[var]))
+            if not isinstance(child, TerminalNodeImpl):
+                if isinstance(child, GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0))
+                    # self.variables[var] = np.sqrt(float(self.variables[var]))
                     return np.log(float(self.variables[var]))
             else:
-                if is_float(str(child.getChild(0))):
-                    return np.log(float(str(child.getChild(0))))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                if is_float(str(child)):
+                    return np.log(float(str(child)))
 
     def visitExp_func(self, ctx:GrammarParser.Exp_funcContext):
         for child in ctx.children:
-            if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
-                    #self.variables[var] = np.exp(float(self.variables[var]))
+            if not isinstance(child, TerminalNodeImpl):
+                if isinstance(child, GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0))
+                    # self.variables[var] = np.sqrt(float(self.variables[var]))
                     return np.exp(float(self.variables[var]))
             else:
-                if is_float(str(child.getChild(0))):
-                    return np.exp(float(str(child.getChild(0))))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
-
+                if is_float(str(child)):
+                    return np.exp(float(str(child)))
     def visitFloor_func(self, ctx:GrammarParser.Floor_funcContext):
         for child in ctx.children:
-            if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
-                    #self.variables[var] = np.floor(float(self.variables[var]))
+            if not isinstance(child, TerminalNodeImpl):
+                if isinstance(child, GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0))
+                    # self.variables[var] = np.sqrt(float(self.variables[var]))
                     return np.floor(float(self.variables[var]))
             else:
-                if is_float(str(child.getChild(0))):
-                    return np.floor(float(str(child.getChild(0))))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                if is_float(str(child)):
+                    return np.floor(float(str(child)))
 
-    def visitCeil_func(self, ctx:GrammarParser.Floor_funcContext):
+    def visitCeil_func(self, ctx:GrammarParser.Ceil_funcContext):
         for child in ctx.children:
-            if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
-                    #self.variables[var] = np.ceil(float(self.variables[var]))
+            if not isinstance(child, TerminalNodeImpl):
+                if isinstance(child, GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0))
+                    # self.variables[var] = np.sqrt(float(self.variables[var]))
                     return np.ceil(float(self.variables[var]))
             else:
-                if is_float(str(child.getChild(0))):
-                    return np.ceil(float(str(child.getChild(0))))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                if is_float(str(child)):
+                    return np.ceil(float(str(child)))
 
     def visitIf_statement(self, ctx:GrammarParser.If_statementContext):
         cond_value = self.visitCondition(ctx.cond)
@@ -260,20 +250,20 @@ class VisitorImpl(GrammarVisitor):
     def visitCondition(self, ctx:GrammarParser.ConditionContext):
         l = None
         r = None
-        if isinstance(ctx.left.getChild(0), TerminalNodeImpl):
-            if is_float(str(ctx.left.getChild(0))):
-                l = float(str(ctx.left.getChild(0)))
+        if isinstance(ctx.left.getChild(0).getChild(0), TerminalNodeImpl):
+            if is_float(str(ctx.left.getChild(0).getChild(0))):
+                l = float(str(ctx.left.getChild(0).getChild(0)))
             else:
                 raise InterpreterError('Left operand is not a numeric expression')
-        elif isinstance(ctx.left.getChild(0), GrammarParser.VariableContext):
+        elif isinstance(ctx.left.getChild(0).getChild(0), GrammarParser.Variable_scalarContext):
             l = self.variables[str(ctx.left.getChild(0).getChild(0).getChild(0))]
 
-        if isinstance(ctx.right.getChild(0), TerminalNodeImpl):
-            if is_float(str(ctx.right.getChild(0))):
-                r = float(str(ctx.right.getChild(0)))
+        if isinstance(ctx.right.getChild(0).getChild(0), TerminalNodeImpl):
+            if is_float(str(ctx.right.getChild(0).getChild(0))):
+                r = float(str(ctx.right.getChild(0).getChild(0)))
             else:
                 raise InterpreterError('Right operand is not a numeric expression')
-        elif isinstance(ctx.right.getChild(0), GrammarParser.VariableContext):
+        elif isinstance(ctx.right.getChild(0).getChild(0), GrammarParser.Variable_scalarContext):
             r = self.variables[str(ctx.right.getChild(0).getChild(0).getChild(0))]
 
         if str(ctx.op.getChild(0)) == '=':

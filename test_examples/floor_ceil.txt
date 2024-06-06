@@ -1,7 +1,6 @@
 x := 1.6
 
 print(x)
-
 print(floor(x))
 print(ceil(x))
 

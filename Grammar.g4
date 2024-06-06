@@ -15,18 +15,18 @@ vec_add: (vector | variable_vec) SPACE* PLUS SPACE* (vector | variable_vec);
 vec_scalar_mult: (vector | variable_vec) SPACE* MULTIPLICATION SPACE* (NUMBER | variable_scalar)
     | (NUMBER | variable_scalar) SPACE* MULTIPLICATION SPACE* (vector | variable_vec);
 
-sin: SIN PAR_LEFT expression PAR_RIGHT;
-cos: COS PAR_LEFT expression PAR_RIGHT;
-sqrt: SQRT PAR_LEFT expression PAR_RIGHT;
-root: ROOT PAR_LEFT expression COMMA NUMBER PAR_RIGHT;
-log: LOG PAR_LEFT expression PAR_RIGHT;
+sin: SIN PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+cos: COS PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+sqrt: SQRT PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+root: ROOT PAR_LEFT (NUMBER | variable_scalar) COMMA NUMBER PAR_RIGHT;
+log: LOG PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
 
 vector: BRACKET_LEFT NUMBER (COMMA SPACE* NUMBER)* BRACKET_RIGHT;
 matrix: BRACKET_LEFT vector (COMMA SPACE* vector)* BRACKET_RIGHT;
 
 trig_func: sin | cos;
 
-scalar_op: addition | subtraction | multiplication | modulo_op;
+scalar_op: addition | subtraction | multiplication | modulo_op | sin | cos | sqrt | log | exp_func | abs_func | floor_func | ceil_func;
 
 vector_op: dot_product | vec_add | vec_scalar_mult;
 
@@ -38,21 +38,21 @@ expression_mat: matrix_op | variable_mat | matrix;
 
 built_in_func: trig_func | sqrt | log | exp_func | abs_func | ceil_func | floor_func;
 
-expression: built_in_func | expression_scalar | expression_vec | expression_mat;
+expression: expression_scalar | expression_vec | expression_mat;
 
-exp_func: EXP PAR_LEFT expression PAR_RIGHT;
-abs_func: ABS PAR_LEFT expression PAR_RIGHT;
-ceil_func: CEIL PAR_LEFT expression PAR_RIGHT;
-floor_func: FLOOR PAR_LEFT expression PAR_RIGHT;
+exp_func: EXP PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+abs_func: ABS PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+ceil_func: CEIL PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+floor_func: FLOOR PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
 
-arcsin_func: ARCSIN PAR_LEFT expression PAR_RIGHT;
-arccos_func: ARCCOS PAR_LEFT expression PAR_RIGHT;
-arctan_func: ARCTAN PAR_LEFT expression PAR_RIGHT;
+arcsin_func: ARCSIN PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+arccos_func: ARCCOS PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+arctan_func: ARCTAN PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
 
-sinh_func: SINH PAR_LEFT expression PAR_RIGHT;
-cosh_func: COSH PAR_LEFT expression PAR_RIGHT;
+sinh_func: SINH PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
+cosh_func: COSH PAR_LEFT (NUMBER | variable_scalar) PAR_RIGHT;
 
-factorial_func: expression FACTORIAL;
+factorial_func: (NUMBER | variable_scalar) FACTORIAL;
 
 params: param SPACE* (COMMA SPACE* param)* | empty;
 param: variable | variable ASSIGNMENT expression;
@@ -69,7 +69,7 @@ else_statement: ELSE SPACE* NEWLINE* body=statements NEWLINE* '}';
 for_statement: FOR SPACE* init=assignment_statement SPACE* SEMICOLON SPACE* cond=condition SPACE* SEMICOLON SPACE* update=assignment_statement SPACE* ')' SPACE* BRACE_LEFT NEWLINE* SPACE* body=statements SPACE* NEWLINE* BRACE_RIGHT;
 print_statement: PRINT SPACE* expression SPACE* ')';
 
-condition: left=expression SPACE* op=logic_op SPACE* right=expression;
+condition: left=expression_scalar SPACE* op=logic_op SPACE* right=expression_scalar;
 
 logic_op: EQUALS | NOT_EQUALS | LESS_THAN | GREATER_THAN | LESS_THAN_EQUALS | GREATER_THAN_EQUALS;
 
