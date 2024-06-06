@@ -25,23 +25,30 @@ class VisitorImpl(GrammarVisitor):
 
         for child in ctx.children:
             #print(f'{child} ({type(child)})')
-            if isinstance(child, GrammarParser.VariableContext):
+            if isinstance(child, GrammarParser.Variable_scalarContext) or isinstance(child, GrammarParser.Variable_matContext) or isinstance(child, GrammarParser.Variable_vecContext):
                 #print(f'{child.getChild(0).getChild(0)} ({type(child.getChild(0).getChild(0))})')
-                var = str(child.getChild(0).getChild(0))
+                var = str(child.getChild(0))
             elif isinstance(child, GrammarParser.MatrixContext):
                 pass
-            elif isinstance(child, GrammarParser.ExpressionContext):
+            elif isinstance(child, GrammarParser.Expression_scalarContext):
                 if isinstance(child.getChild(0), TerminalNodeImpl):
                     if is_float(str(child.getChild(0))):
                         val = float(str(child.getChild(0)))
                     else:
                         raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
-                else:
-                    val = self.visitExpression(child)
+                elif isinstance(child.getChild(0), GrammarParser.Scalar_opContext):
+                    val = self.visitScalar_op(child.getChild(0))
+            elif isinstance(child, GrammarParser.Expression_vecContext):
+                val = self.visitExpression_vec(child)
+                # else:
+                #     val = self.visitExpression(child)
 
         self.variables[var] = val
         #print(f'{var}: {val}')
         return val
+
+    def visitExpression_vec(self, ctx:GrammarParser.Expression_vecContext):
+        pass
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
         result = 0
@@ -106,10 +113,17 @@ class VisitorImpl(GrammarVisitor):
                     if child.getChild(0) is not None:
                         self.output += f'{str(child.getChild(0))}\n'
                         #print(str(child.getChild(0)))
-                elif isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    if self.variables[str(child.getChild(0).getChild(0).getChild(0))] is not None:
-                        self.output += f'{self.variables[str(child.getChild(0).getChild(0).getChild(0))]}\n'
+                elif isinstance(child.getChild(0), GrammarParser.Expression_scalarContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    val = self.variables[var]
+                    if var is not None:
+                        self.output += f'{val}\n'
                         #print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
+                elif isinstance(child.getChild(0), GrammarParser.Expression_vecContext):
+                    var = str(child.getChild(0).getChild(0).getChild(0))
+                    val = list(self.variables[var])
+                    if var is not None:
+                        self.output += f'{val}\n'
                 elif isinstance(child.getChild(0), GrammarParser.Built_in_funcContext):
                     self.output += f'{self.visitBuilt_in_func(child.getChild(0))}\n'
                     #print(str(self.visitBuilt_in_func(child.getChild(0))))
