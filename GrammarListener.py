@@ -206,12 +206,30 @@ class GrammarListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by GrammarParser#operation.
-    def enterOperation(self, ctx:GrammarParser.OperationContext):
+    # Enter a parse tree produced by GrammarParser#expression_scalar.
+    def enterExpression_scalar(self, ctx:GrammarParser.Expression_scalarContext):
         pass
 
-    # Exit a parse tree produced by GrammarParser#operation.
-    def exitOperation(self, ctx:GrammarParser.OperationContext):
+    # Exit a parse tree produced by GrammarParser#expression_scalar.
+    def exitExpression_scalar(self, ctx:GrammarParser.Expression_scalarContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#expression_vec.
+    def enterExpression_vec(self, ctx:GrammarParser.Expression_vecContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#expression_vec.
+    def exitExpression_vec(self, ctx:GrammarParser.Expression_vecContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#expression_mat.
+    def enterExpression_mat(self, ctx:GrammarParser.Expression_matContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#expression_mat.
+    def exitExpression_mat(self, ctx:GrammarParser.Expression_matContext):
         pass
 
 

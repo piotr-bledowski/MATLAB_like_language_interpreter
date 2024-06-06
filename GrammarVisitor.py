@@ -119,8 +119,18 @@ class GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by GrammarParser#operation.
-    def visitOperation(self, ctx:GrammarParser.OperationContext):
+    # Visit a parse tree produced by GrammarParser#expression_scalar.
+    def visitExpression_scalar(self, ctx:GrammarParser.Expression_scalarContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GrammarParser#expression_vec.
+    def visitExpression_vec(self, ctx:GrammarParser.Expression_vecContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GrammarParser#expression_mat.
+    def visitExpression_mat(self, ctx:GrammarParser.Expression_matContext):
         return self.visitChildren(ctx)
 
 

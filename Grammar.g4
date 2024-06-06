@@ -28,15 +28,17 @@ trig_func: sin | cos;
 
 scalar_op: addition | subtraction | multiplication | modulo_op;
 
-vector_op: dot_product;
+vector_op: dot_product | vec_add | vec_scalar_mult;
 
-matrix_op: matmul;
+matrix_op: matmul | mat_add | mat_scalar_mult;
 
-operation: matmul | dot_product | scalar_op;
+expression_scalar: scalar_op | variable_scalar | NUMBER;
+expression_vec: vector_op | variable_vec | vector;
+expression_mat: matrix_op | variable_mat | matrix;
 
-built_in_func: trig_func | sqrt | root | log | exp_func | abs_func | ceil_func | floor_func;
+built_in_func: trig_func | sqrt | log | exp_func | abs_func | ceil_func | floor_func;
 
-expression: built_in_func | operation | matrix | vector | variable | NUMBER;
+expression: built_in_func | expression_scalar | expression_vec | expression_mat;
 
 exp_func: EXP PAR_LEFT expression PAR_RIGHT;
 abs_func: ABS PAR_LEFT expression PAR_RIGHT;
@@ -58,7 +60,9 @@ empty: ;
 statements: statement | statement statements;
 statement: SPACE* (assignment_statement | expression | if_statement | for_statement | print_statement | func_statement)? NEWLINE;
 
-assignment_statement: variable SPACE* ASSIGNMENT SPACE* expression;
+assignment_statement: variable_scalar SPACE* ASSIGNMENT SPACE* expression_scalar
+    | variable_vec SPACE* ASSIGNMENT SPACE* expression_vec
+    | variable_mat SPACE* ASSIGNMENT SPACE* expression_mat;
 func_statement: FUNC SPACE* PAR_LEFT SPACE* params SPACE* PAR_RIGHT SPACE* BRACE_LEFT SPACE* statements SPACE* BRACE_RIGHT;
 if_statement: IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* if_body=statements NEWLINE* BRACE_RIGHT | IF SPACE* cond=condition ')' SPACE* BRACE_LEFT SPACE* NEWLINE* if_body=statements SPACE* BRACE_RIGHT SPACE* NEWLINE* else_body=else_statement;
 else_statement: ELSE SPACE* NEWLINE* body=statements NEWLINE* '}';
