@@ -2,6 +2,12 @@
 
 Our language lays somewhere in between MATLAB, Python and C, it's a mix of various syntax conventions and offers a robust mathematical toolkit by virtue of numpy-aided Python implementation of the interpreter.
 
+## Reqirements:
+- Python 3.9+
+- ANTLR4
+- Graphviz
+- Kivi
+
 ## How to run
 In the project's root directory run:
 `python main.py`
