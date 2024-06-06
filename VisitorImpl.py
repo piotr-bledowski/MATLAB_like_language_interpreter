@@ -48,7 +48,22 @@ class VisitorImpl(GrammarVisitor):
         return val
 
     def visitExpression_vec(self, ctx:GrammarParser.Expression_vecContext):
-        pass
+        if isinstance(ctx.getChild(0), GrammarParser.VectorContext):
+            return self.visitVector(ctx.getChild(0))
+        else:
+            return self.visitChildren(ctx)
+
+    def visitVector(self, ctx:GrammarParser.VectorContext):
+        v = []
+        for child in ctx.children:
+            if isinstance(child, TerminalNodeImpl):
+                if is_float(str(child)):
+                    v.append(float(str(child)))
+                else:
+                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+            elif isinstance(child, GrammarParser.Expression_scalarContext):
+                val = self.visitExpression_scalar(child)
+                v.append(val)
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
         result = 0
@@ -113,17 +128,14 @@ class VisitorImpl(GrammarVisitor):
                     if child.getChild(0) is not None:
                         self.output += f'{str(child.getChild(0))}\n'
                         #print(str(child.getChild(0)))
-                elif isinstance(child.getChild(0), GrammarParser.Expression_scalarContext):
+                elif isinstance(child.getChild(0), GrammarParser.Expression_scalarContext) or isinstance(child.getChild(0), GrammarParser.Expression_vecContext) or isinstance(child.getChild(0), GrammarParser.Expression_matContext):
                     var = str(child.getChild(0).getChild(0).getChild(0))
-                    val = self.variables[var]
                     if var is not None:
-                        self.output += f'{val}\n'
-                        #print(self.variables[str(child.getChild(0).getChild(0).getChild(0))])
-                elif isinstance(child.getChild(0), GrammarParser.Expression_vecContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
-                    val = list(self.variables[var])
-                    if var is not None:
-                        self.output += f'{val}\n'
+                        if isinstance(self.variables[var], np.ndarray):
+                            val = list(self.variables[var])
+                        else:
+                            val = self.variables[var]
+                        self.output += f'{self.visitBuilt_in_func(child.getChild(0))}\n'
                 elif isinstance(child.getChild(0), GrammarParser.Built_in_funcContext):
                     self.output += f'{self.visitBuilt_in_func(child.getChild(0))}\n'
                     #print(str(self.visitBuilt_in_func(child.getChild(0))))
