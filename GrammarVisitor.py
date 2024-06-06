@@ -39,8 +39,28 @@ class GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by GrammarParser#mat_add.
+    def visitMat_add(self, ctx:GrammarParser.Mat_addContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GrammarParser#mat_scalar_mult.
+    def visitMat_scalar_mult(self, ctx:GrammarParser.Mat_scalar_multContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by GrammarParser#dot_product.
     def visitDot_product(self, ctx:GrammarParser.Dot_productContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GrammarParser#vec_add.
+    def visitVec_add(self, ctx:GrammarParser.Vec_addContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GrammarParser#vec_scalar_mult.
+    def visitVec_scalar_mult(self, ctx:GrammarParser.Vec_scalar_multContext):
         return self.visitChildren(ctx)
 
 
@@ -86,6 +106,16 @@ class GrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by GrammarParser#scalar_op.
     def visitScalar_op(self, ctx:GrammarParser.Scalar_opContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GrammarParser#vector_op.
+    def visitVector_op(self, ctx:GrammarParser.Vector_opContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GrammarParser#matrix_op.
+    def visitMatrix_op(self, ctx:GrammarParser.Matrix_opContext):
         return self.visitChildren(ctx)
 
 

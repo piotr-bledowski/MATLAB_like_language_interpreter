@@ -62,12 +62,48 @@ class GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by GrammarParser#mat_add.
+    def enterMat_add(self, ctx:GrammarParser.Mat_addContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#mat_add.
+    def exitMat_add(self, ctx:GrammarParser.Mat_addContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#mat_scalar_mult.
+    def enterMat_scalar_mult(self, ctx:GrammarParser.Mat_scalar_multContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#mat_scalar_mult.
+    def exitMat_scalar_mult(self, ctx:GrammarParser.Mat_scalar_multContext):
+        pass
+
+
     # Enter a parse tree produced by GrammarParser#dot_product.
     def enterDot_product(self, ctx:GrammarParser.Dot_productContext):
         pass
 
     # Exit a parse tree produced by GrammarParser#dot_product.
     def exitDot_product(self, ctx:GrammarParser.Dot_productContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#vec_add.
+    def enterVec_add(self, ctx:GrammarParser.Vec_addContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#vec_add.
+    def exitVec_add(self, ctx:GrammarParser.Vec_addContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#vec_scalar_mult.
+    def enterVec_scalar_mult(self, ctx:GrammarParser.Vec_scalar_multContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#vec_scalar_mult.
+    def exitVec_scalar_mult(self, ctx:GrammarParser.Vec_scalar_multContext):
         pass
 
 
@@ -149,6 +185,24 @@ class GrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by GrammarParser#scalar_op.
     def exitScalar_op(self, ctx:GrammarParser.Scalar_opContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#vector_op.
+    def enterVector_op(self, ctx:GrammarParser.Vector_opContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#vector_op.
+    def exitVector_op(self, ctx:GrammarParser.Vector_opContext):
+        pass
+
+
+    # Enter a parse tree produced by GrammarParser#matrix_op.
+    def enterMatrix_op(self, ctx:GrammarParser.Matrix_opContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#matrix_op.
+    def exitMatrix_op(self, ctx:GrammarParser.Matrix_opContext):
         pass
 
 

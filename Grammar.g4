@@ -2,12 +2,18 @@ grammar Grammar;
 
 program: statements+EOF;
 
-addition: (NUMBER | variable | multiplication) SPACE* PLUS SPACE* (NUMBER | variable | multiplication);
-subtraction: (NUMBER | variable | multiplication) SPACE* MINUS SPACE* (NUMBER | variable | multiplication);
-multiplication: (NUMBER | variable) SPACE* MULTIPLICATION SPACE* (NUMBER | variable);
+addition: (NUMBER | variable_scalar | multiplication) SPACE* PLUS SPACE* (NUMBER | variable_scalar | multiplication);
+subtraction: (NUMBER | variable_scalar | multiplication) SPACE* MINUS SPACE* (NUMBER | variable_scalar | multiplication);
+multiplication: (NUMBER | variable_scalar) SPACE* MULTIPLICATION SPACE* (NUMBER | variable_scalar);
 modulo_op: (NUMBER | variable) SPACE* MOD SPACE* (NUMBER | variable);
 matmul: (matrix | variable_mat) SPACE* MULTIPLICATION SPACE* (matrix | variable_mat);
+mat_add: (matrix | variable_mat) SPACE* PLUS SPACE* (matrix | variable_mat);
+mat_scalar_mult: (matrix | variable_mat) SPACE* MULTIPLICATION SPACE* (NUMBER | variable_scalar)
+    | (NUMBER | variable_scalar) SPACE* MULTIPLICATION SPACE* (matrix | variable_mat);
 dot_product: (vector | variable_vec) SPACE* MULTIPLICATION SPACE* (vector | variable_vec);
+vec_add: (vector | variable_vec) SPACE* PLUS SPACE* (vector | variable_vec);
+vec_scalar_mult: (vector | variable_vec) SPACE* MULTIPLICATION SPACE* (NUMBER | variable_scalar)
+    | (NUMBER | variable_scalar) SPACE* MULTIPLICATION SPACE* (vector | variable_vec);
 
 sin: SIN PAR_LEFT expression PAR_RIGHT;
 cos: COS PAR_LEFT expression PAR_RIGHT;
@@ -21,6 +27,10 @@ matrix: BRACKET_LEFT vector (COMMA SPACE* vector)* BRACKET_RIGHT;
 trig_func: sin | cos;
 
 scalar_op: addition | subtraction | multiplication | modulo_op;
+
+vector_op: dot_product;
+
+matrix_op: matmul;
 
 operation: matmul | dot_product | scalar_op;
 
@@ -98,7 +108,7 @@ BRACKET_LEFT: '[';
 BRACKET_RIGHT: ']';
 SEMICOLON: ';';
 
-variable: variable_vec | variable_mat;
+variable: variable_scalar | variable_vec | variable_mat;
 variable_scalar: VEC_ID;
 variable_vec: VEC_ID;
 variable_mat: MAT_ID;
