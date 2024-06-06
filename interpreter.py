@@ -31,7 +31,6 @@ def print_tree(node, indent=0):
             print_tree(child, indent + 2)
 
 def read_file(input_file: str='test_examples/example2.txt'):
-    r = ''
     with open(input_file, 'r') as f:
         r = f.read()
     return r
@@ -46,10 +45,12 @@ def interpret(code: str) -> str:
     interpreter.visit(tree)
     out = interpreter.output
     if interpreter.error_message:
-        out += f'Error encountered: {interpreter.error_message}'
+        out = f'Error encountered: {interpreter.error_message}'
     return out
 
-print(interpret(read_file('test_examples/vec.txt')))
+print(interpret('''ex := 2 - 1
+print(ex)
+'''))
 
 # def parse_file_to_nested_list(input_file='simple_example.txt'):
 #     with open(input_file, 'r') as f:

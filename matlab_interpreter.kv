@@ -1,0 +1,53 @@
+BoxLayout:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+    canvas.before:
+        Color:
+            rgba: (0.2, 0.2, 0.2, 1)  # Background color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "MATLAB Code Interpreter"
+        font_size: 32
+        size_hint: 1, None  # Width fills, height fixed
+        height: 60
+        color: (1, 1, 1, 1)  # Text color
+
+    TextInput:
+        id: code_input
+        hint_text: "Enter MATLAB code here"
+        multiline: True
+        size_hint: 1, 0.6  # Width fills, height scales to 60% of available space
+        background_color: (0.1, 0.1, 0.1, 1)  # Input background color
+        foreground_color: (1, 1, 1, 1)  # Input text color
+        cursor_color: (1, 1, 1, 1)  # Cursor color
+        hint_text_color: (0.7, 0.7, 0.7, 1)  # Hint text color
+
+    Button:
+        text: "Run"
+        font_size: 25
+        size_hint: 1, None  # Width fills, height fixed
+        height: 50
+        background_color: (0.3, 0.6, 0.9, 1)  # Button color
+        color: (1, 1, 1, 1)  # Button text color
+        on_press: app.interpret_code()
+
+    Label:
+        text: "Output"
+        font_size: 24
+        size_hint: 1, None  # Width fills, height fixed
+        height: 50
+        color: (1, 1, 1, 1)  # Text color
+
+    TextInput:
+        id: output_display
+        hint_text: "Output will be shown here"
+        readonly: True
+        multiline: True
+        size_hint: 1, 0.3  # Width fills, height scales to 30% of available space
+        background_color: (0.1, 0.1, 0.1, 1)  # Output background color
+        foreground_color: (1, 1, 1, 1)  # Output text color
+        hint_text_color: (0.7, 0.7, 0.7, 1)  # Hint text color
