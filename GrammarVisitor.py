@@ -106,7 +106,7 @@ class GrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by GrammarParser#abs_func.
     def visitAbs_func(self, ctx:GrammarParser.Abs_funcContext):
-        return self.visitChildren(ctx) # copy code from visitSin()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#ceil_func.
@@ -121,37 +121,37 @@ class GrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by GrammarParser#arcsin_func.
     def visitArcsin_func(self, ctx:GrammarParser.Arcsin_funcContext):
-        return self.visitChildren(ctx) # copy code from visitSin()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#arccos_func.
     def visitArccos_func(self, ctx:GrammarParser.Arccos_funcContext):
-        return self.visitChildren(ctx) # copy code from visitSin()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#arctan_func.
     def visitArctan_func(self, ctx:GrammarParser.Arctan_funcContext):
-        return self.visitChildren(ctx) # copy code from visitSin()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#sinh_func.
     def visitSinh_func(self, ctx:GrammarParser.Sinh_funcContext):
-        return self.visitChildren(ctx) # copy code from visitSin()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#cosh_func.
     def visitCosh_func(self, ctx:GrammarParser.Cosh_funcContext):
-        return self.visitChildren(ctx) # copy code from visitSin()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#factorial_func.
     def visitFactorial_func(self, ctx:GrammarParser.Factorial_funcContext):
-        return self.visitChildren(ctx) # copy code from visitSin()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#modulo_op.
     def visitModulo_op(self, ctx:GrammarParser.Modulo_opContext):
-        return self.visitChildren(ctx) # copy code from visitSubtraction()
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by GrammarParser#params.

@@ -41,7 +41,7 @@ class VisitorImpl(GrammarVisitor):
 
         self.variables[var] = val
         #print(f'{var}: {val}')
-        return self.visitChildren(ctx)
+        return val
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
         result = 0
@@ -213,6 +213,15 @@ class VisitorImpl(GrammarVisitor):
             self.visitStatements(ctx.if_body)
         else:
             self.visitStatements(ctx.else_body.body)
+
+    def visitFor_statement(self, ctx:GrammarParser.For_statementContext):
+        self.visitAssignment_statement(ctx.init)
+
+        while self.visitCondition(ctx.cond):
+            self.visitStatements(ctx.body)
+            self.visitAssignment_statement(ctx.update)
+
+        #return self.visitChildren(ctx)
 
     def visitCondition(self, ctx:GrammarParser.ConditionContext):
         l = None
