@@ -25,3 +25,6 @@ Upon running main.py a tkinter window should show up:
 - if statements
 - for loops
 - element-wise vector operations
+
+## example:
+![image](https://github.com/piotr-bledowski/MATLAB_like_language_interpreter/assets/63125128/076e3407-14c1-42a7-98ea-46ed6be1f538)
