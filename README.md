@@ -16,3 +16,4 @@ Upon running main.py a tkinter window should show up:
 - scalar math operations (trigonometric functions, exp, log, floor, ceil, sqrt, basic arithmetic)
 - if statements
 - for loops
+- element-wise vector operations
