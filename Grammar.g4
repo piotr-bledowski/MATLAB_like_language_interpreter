@@ -5,6 +5,7 @@ program: statements+EOF;
 addition: (NUMBER | variable | multiplication) SPACE* PLUS SPACE* (NUMBER | variable | multiplication);
 subtraction: (NUMBER | variable | multiplication) SPACE* MINUS SPACE* (NUMBER | variable | multiplication);
 multiplication: (NUMBER | variable) SPACE* MULTIPLICATION SPACE* (NUMBER | variable);
+modulo_op: (NUMBER | variable) SPACE* MOD SPACE* (NUMBER | variable);
 matmul: (matrix | variable_mat) SPACE* MULTIPLICATION SPACE* (matrix | variable_mat);
 dot_product: (vector | variable_vec) SPACE* MULTIPLICATION SPACE* (vector | variable_vec);
 
@@ -19,7 +20,7 @@ matrix: BRACKET_LEFT vector (COMMA SPACE* vector)* BRACKET_RIGHT;
 
 trig_func: sin | cos;
 
-scalar_op: addition | subtraction | multiplication;
+scalar_op: addition | subtraction | multiplication | modulo_op;
 
 operation: matmul | dot_product | scalar_op;
 
@@ -40,7 +41,6 @@ sinh_func: SINH PAR_LEFT expression PAR_RIGHT;
 cosh_func: COSH PAR_LEFT expression PAR_RIGHT;
 
 factorial_func: expression FACTORIAL;
-modulo_op: expression MOD expression;
 
 params: param SPACE* (COMMA SPACE* param)* | empty;
 param: variable | variable ASSIGNMENT expression;

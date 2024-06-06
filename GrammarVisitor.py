@@ -29,6 +29,11 @@ class GrammarVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by GrammarParser#modulo_op.
+    def visitModulo_op(self, ctx:GrammarParser.Modulo_opContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by GrammarParser#matmul.
     def visitMatmul(self, ctx:GrammarParser.MatmulContext):
         return self.visitChildren(ctx)
@@ -146,11 +151,6 @@ class GrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by GrammarParser#factorial_func.
     def visitFactorial_func(self, ctx:GrammarParser.Factorial_funcContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by GrammarParser#modulo_op.
-    def visitModulo_op(self, ctx:GrammarParser.Modulo_opContext):
         return self.visitChildren(ctx)
 
 

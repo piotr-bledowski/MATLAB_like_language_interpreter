@@ -44,6 +44,15 @@ class GrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by GrammarParser#modulo_op.
+    def enterModulo_op(self, ctx:GrammarParser.Modulo_opContext):
+        pass
+
+    # Exit a parse tree produced by GrammarParser#modulo_op.
+    def exitModulo_op(self, ctx:GrammarParser.Modulo_opContext):
+        pass
+
+
     # Enter a parse tree produced by GrammarParser#matmul.
     def enterMatmul(self, ctx:GrammarParser.MatmulContext):
         pass
@@ -257,15 +266,6 @@ class GrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by GrammarParser#factorial_func.
     def exitFactorial_func(self, ctx:GrammarParser.Factorial_funcContext):
-        pass
-
-
-    # Enter a parse tree produced by GrammarParser#modulo_op.
-    def enterModulo_op(self, ctx:GrammarParser.Modulo_opContext):
-        pass
-
-    # Exit a parse tree produced by GrammarParser#modulo_op.
-    def exitModulo_op(self, ctx:GrammarParser.Modulo_opContext):
         pass
 
 
