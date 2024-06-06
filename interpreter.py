@@ -1,9 +1,11 @@
 from antlr4 import *
 from antlr4.tree.Tree import TerminalNodeImpl
+
 from GrammarLexer import GrammarLexer
 from GrammarParser import GrammarParser
 from GrammarVisitor import GrammarVisitor
 from VisitorImpl import VisitorImpl
+
 
 
 # def print_tree(node, indent=0):
@@ -45,12 +47,10 @@ def interpret(code: str) -> str:
     interpreter.visit(tree)
     out = interpreter.output
     if interpreter.error_message:
-        out = f'Error encountered: {interpreter.error_message}'
+        out += f'Error encountered: {interpreter.error_message}'
     return out
 
-print(interpret('''ex := 2 - 1
-print(ex)
-'''))
+print(interpret(read_file('test_examples/example.txt')))
 
 # def parse_file_to_nested_list(input_file='simple_example.txt'):
 #     with open(input_file, 'r') as f:

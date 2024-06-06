@@ -65,6 +65,8 @@ class VisitorImpl(GrammarVisitor):
                 val = self.visitExpression_scalar(child)
                 v.append(val)
 
+        return np.ndarray(v)
+
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
         result = 0
         for child in ctx.children:
@@ -72,8 +74,8 @@ class VisitorImpl(GrammarVisitor):
             if isinstance(child, TerminalNodeImpl):
                 if is_float(str(child)):
                     result += float(str(child))
-            elif isinstance(child, GrammarParser.VariableContext):
-                var = self.variables[str(child.getChild(0).getChild(0))]
+            elif isinstance(child, GrammarParser.Variable_scalarContext):
+                var = self.variables[str(child.getChild(0))]
                 result += var
             elif isinstance(child, GrammarParser.MultiplicationContext):
                 result += self.visitMultiplication(child)
@@ -90,8 +92,8 @@ class VisitorImpl(GrammarVisitor):
                         l = float(str(child))
                     elif r is None:
                         r = float(str(child))
-            elif isinstance(child, GrammarParser.VariableContext):
-                var = self.variables[str(child.getChild(0).getChild(0))]
+            elif isinstance(child, GrammarParser.Variable_scalarContext):
+                var = self.variables[str(child.getChild(0))]
                 if l is None:
                     l = var
                 elif r is None:
@@ -129,13 +131,19 @@ class VisitorImpl(GrammarVisitor):
                         self.output += f'{str(child.getChild(0))}\n'
                         #print(str(child.getChild(0)))
                 elif isinstance(child.getChild(0), GrammarParser.Expression_scalarContext) or isinstance(child.getChild(0), GrammarParser.Expression_vecContext) or isinstance(child.getChild(0), GrammarParser.Expression_matContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
-                    if var is not None:
-                        if isinstance(self.variables[var], np.ndarray):
-                            val = list(self.variables[var])
+                    if isinstance(child.getChild(0).getChild(0), TerminalNodeImpl):
+                        if is_float(str(child.getChild(0).getChild(0))):
+                            self.output += f'{float(str(child.getChild(0).getChild(0)))}'
                         else:
-                            val = self.variables[var]
-                        self.output += f'{self.visitBuilt_in_func(child.getChild(0))}\n'
+                            raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
+                    else:
+                        var = str(child.getChild(0).getChild(0).getChild(0))
+                        if var is not None:
+                            if isinstance(self.variables[var], np.ndarray):
+                                val = list(self.variables[var])
+                            else:
+                                val = self.variables[var]
+                            self.output += f'{val}\n'
                 elif isinstance(child.getChild(0), GrammarParser.Built_in_funcContext):
                     self.output += f'{self.visitBuilt_in_func(child.getChild(0))}\n'
                     #print(str(self.visitBuilt_in_func(child.getChild(0))))
@@ -145,8 +153,8 @@ class VisitorImpl(GrammarVisitor):
     def visitSin(self, ctx:GrammarParser.SinContext):
         for child in ctx.children:
             if not isinstance(child.getChild(0), TerminalNodeImpl):
-                if isinstance(child.getChild(0), GrammarParser.VariableContext):
-                    var = str(child.getChild(0).getChild(0).getChild(0))
+                if isinstance(child.getChild(0), GrammarParser.Variable_scalarContext):
+                    var = str(child.getChild(0).getChild(0))
                     #self.variables[var] = np.sin(float(self.variables[var]))
                     return np.sin(float(self.variables[var]))
             else:

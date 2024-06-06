@@ -98,6 +98,7 @@ class MatlabInterpreterApp(App):
     def interprete(self, code: str) -> str:
         # This is a placeholder for the actual interpret function
         # Here you would call your existing MATLAB interpreter logic
+
         try:
             return interpret(code)
         except Exception as e:
