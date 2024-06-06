@@ -62,13 +62,11 @@ class VisitorImpl(GrammarVisitor):
             if isinstance(child, TerminalNodeImpl):
                 if is_float(str(child)):
                     v.append(float(str(child)))
-                else:
-                    raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
             elif isinstance(child, GrammarParser.Expression_scalarContext):
                 val = self.visitExpression_scalar(child)
                 v.append(val)
 
-        return np.ndarray(v)
+        return np.array(v)
 
     def visitAddition(self, ctx:GrammarParser.AdditionContext):
         result = 0
@@ -136,7 +134,7 @@ class VisitorImpl(GrammarVisitor):
                 elif isinstance(child.getChild(0), GrammarParser.Expression_scalarContext) or isinstance(child.getChild(0), GrammarParser.Expression_vecContext) or isinstance(child.getChild(0), GrammarParser.Expression_matContext):
                     if isinstance(child.getChild(0).getChild(0), TerminalNodeImpl):
                         if is_float(str(child.getChild(0).getChild(0))):
-                            self.output += f'{float(str(child.getChild(0).getChild(0)))}'
+                            self.output += f'{float(str(child.getChild(0).getChild(0)))}\n'
                         else:
                             raise InterpreterError(f'{str(child.getChild(0))} is not a numeric value')
                     elif isinstance(child.getChild(0).getChild(0), GrammarParser.Scalar_opContext):

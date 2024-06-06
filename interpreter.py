@@ -50,7 +50,7 @@ def interpret(code: str) -> str:
         out += f'Error encountered: {interpreter.error_message}'
     return out
 
-print(interpret(read_file('test_examples/for.txt')))
+print(interpret(read_file('test_examples/vec.txt')))
 
 # def parse_file_to_nested_list(input_file='simple_example.txt'):
 #     with open(input_file, 'r') as f:
